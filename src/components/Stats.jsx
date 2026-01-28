@@ -48,27 +48,27 @@ const Stats = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
           <div className="max-w-xl">
             <h2 className="font-serif text-4xl sm:text-6xl leading-[1.15] tracking-tight text-white">
-              One message is all<br />it takes
+              Four decades of<br />clinical excellence
             </h2>
             <p className="mt-6 sm:mt-8 font-sans text-base sm:text-lg leading-relaxed text-white/80">
-              Send a quick voice or text and Hints will create leads,
-              update statuses, add notes, or assign tasks — all in
-              one go.
+              Established in 1982, Lakshmi Hospital has evolved into Kakinada's premier 
+              multi-specialty tertiary care center, pioneering advanced cardiac 
+              interventions and compassionate healthcare in East Godavari.
             </p>
             <button className="group relative mt-10 sm:mt-12 inline-flex items-center overflow-hidden border border-white/40 px-6 py-3 sm:px-7 sm:py-4 font-sans text-sm font-medium tracking-wide text-white">
               <span className="absolute inset-0 bg-black translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out" />
               <span className="relative z-10 flex items-center gap-3">
-                Get to know Hints
+                Our Departments
                 <span className="text-lg">→</span>
               </span>
             </button>
           </div>
 
           <div className="grid grid-cols-2 gap-y-12 gap-x-4 sm:gap-x-20">
-            <Stat value="+350%" label="logged activities" />
-            <Stat value="+80%" label="leads captured" />
-            <Stat value="-70%" label="weekly admin time" />
-            <Stat value="+30%" label="deals closed" />
+            <Stat value="40+" label="Years of Legacy" />
+            <Stat value="1000s" label="Cardiac Procedures" />
+            <Stat value="24/7" label="Emergency Care" />
+            <Stat value="NABH" label="Quality Certified" />
           </div>
         </div>
       </Gutters>
