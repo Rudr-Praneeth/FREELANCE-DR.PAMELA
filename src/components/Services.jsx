@@ -6,14 +6,30 @@ import Gutters from '../layouts/Gutters'
 gsap.registerPlugin(ScrollTrigger)
 
 const servicesList = [
-  { title: "Cardiology", desc: "Interventional and Non-invasive care." },
-  { title: "Surgery", desc: "Bypass and valve replacements." },
-  { title: "Urology", desc: "Kidney and stone-related issues." },
-  { title: "Nephrology", desc: "Kidney care and dialysis services." },
-  { title: "Orthopaedics", desc: "Trauma and joint replacements." },
-  { title: "Medicine", desc: "Chronic and acute illness care." },
-  { title: "Maternity", desc: "Obstetrics and women's health." },
-  { title: "Pediatrics", desc: "Child healthcare and NICU." }
+  {
+    title: "Gynaecology",
+    desc: "Diagnosis and treatment of female reproductive health."
+  },
+  {
+    title: "Laparoscopic Surgery",
+    desc: "Minimally invasive procedures with faster recovery."
+  },
+  {
+    title: "Orthopedic & Arthroscopic",
+    desc: "Advanced care for joints, bones, and mobility."
+  },
+  {
+    title: "Paediatrics",
+    desc: "Complete healthcare for infants, children, and adolescents."
+  },
+  {
+    title: "Bleeding Disorders",
+    desc: "Specialized care for clotting and blood conditions."
+  },
+  {
+    title: "General Medicine",
+    desc: "Comprehensive diagnosis and adult medical care."
+  }
 ]
 
 const Services = () => {
@@ -85,7 +101,7 @@ const Services = () => {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-7xl mx-auto">
           {servicesList.map((service, idx) => (
             <div key={idx} className="service-card group relative p-5 min-h-[140px] flex flex-col justify-center cursor-default">
               

@@ -14,7 +14,6 @@ const NavBar = () => {
     { name: 'Home', hash: '#home' },
     { name: 'Services', hash: '#services' },
     { name: 'Doctors', hash: '#doctors' },
-    { name: 'Contact Us', hash: '#contact-us' }
   ];
 
   return (
@@ -53,7 +52,7 @@ const NavBar = () => {
         <div className="hidden lg:block">
           <button className="group relative h-10 w-32 overflow-hidden rounded-full border border-white/10 bg-transparent text-[11px] uppercase tracking-widest font-bold text-white transition-all duration-500 hover:border-[#F5F5F6] hover:shadow-[0_0_20px_rgba(245,245,246,0.2)]">
             <div className="relative flex items-center justify-center w-full h-full transition-transform duration-300 group-hover:-translate-x-2">
-              <span>Connect</span>
+              <span>Contact</span>
               <span className="absolute right-4 translate-x-4 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100">
                 →
               </span>

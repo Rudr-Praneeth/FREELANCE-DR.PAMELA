@@ -56,7 +56,7 @@ const Hero = () => {
   }, [])
 
   return (
-    <section ref={heroRef} className="relative min-h-[90vh] flex items-center pt-24 lg:pt-32 pb-16 overflow-hidden bg-gradient-to-b from-[#090A10] to-[#3B466B]">
+    <section ref={heroRef} id="home" className="relative min-h-[90vh] flex items-center pt-24 lg:pt-32 pb-16 overflow-hidden bg-gradient-to-b from-[#090A10] to-[#3B466B]">
       <Gutters>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           
@@ -79,8 +79,8 @@ const Hero = () => {
               </h1>
 
               <p className="hero-sub mt-6 max-w-sm text-[14px] sm:text-base text-white/60 leading-relaxed font-sans">
-                Lakshmi Hospital is a multi-specialty tertiary care center delivering
-                world-class cardiac and critical care services with a legacy of trust.
+                It is to fill this need for holistic neurological services that Lakshmi Hospital and Research Centre was started in 1999, 
+                by two committed healthcare professional with specialised training in neuro care.
               </p>
 
               <div className="hero-cta mt-8 flex flex-wrap items-center gap-6">

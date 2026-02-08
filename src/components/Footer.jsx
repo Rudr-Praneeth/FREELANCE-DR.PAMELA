@@ -7,15 +7,13 @@ const Footer = () => {
 
   const footerLinks = {
     specialties: [
-      "Cardiology & Cardiac Surgery",
-      "Urology & Nephrology",
+      "General & Laparoscopic Surgery",
       "Obstetrics & Gynaecology",
-      "Pediatrics & Neonatology",
-      "Critical Care & Pulmonology"
+      "Orthopedic surgery and Arthroscopic surgery",
+      "Pediatrics",
+      "Critical Care & Neurology"
     ],
     patientCare: [
-      "Insurance & TPA Partners",
-      "Dr. YSR Aarogyasri Scheme",
       "Health Check-up Packages",
       "24/7 Pharmacy & Ambulance",
       "NABH Quality Standards"
@@ -26,16 +24,14 @@ const Footer = () => {
     <footer className="bg-[#0D0D0D] pt-24 pb-12 text-[#F5F5F6] border-t border-white/5 font-sans">
       <Gutters>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-y-12 lg:gap-x-12 mb-20">
-          
-          {/* Brand Block - 5 Cols for the long name */}
           <div className="lg:col-span-5 space-y-6">
             <div className="text-xl md:text-2xl font-bold tracking-tighter font-sans leading-tight max-w-xs">
               LAKSHMI HOSPITAL <br /> 
               <span className="text-[#F5F5F6]/50 font-medium italic">& RESEARCH CENTRE</span>
             </div>
             <p className="text-[#7E878E] text-sm leading-relaxed max-w-sm">
-              A premiere multi-specialty tertiary care hospital in East Godavari, 
-              dedicated to integrating clinical excellence with the latest technology since 1982.
+              Established in 1999, Lakshmi Hospital has evolved into a premier multi-specialty tertiary care center, 
+              committed to providing holistic neurological services and compassionate healthcare.
             </p>
             <div className="flex gap-3 pt-2">
               {[
@@ -53,8 +49,6 @@ const Footer = () => {
               ))}
             </div>
           </div>
-
-          {/* Specialties - 2.5 Cols */}
           <div className="lg:col-span-2">
             <h4 className="text-[#F5F5F6] text-sm uppercase tracking-[0.25em] font-bold mb-6">Specialties</h4>
             <ul className="space-y-1.5">
@@ -70,8 +64,6 @@ const Footer = () => {
               ))}
             </ul>
           </div>
-
-          {/* Patient Care - 2.5 Cols */}
           <div className="lg:col-span-2">
             <h4 className="text-[#F5F5F6] text-sm uppercase tracking-[0.25em] font-bold mb-6">Patient Care</h4>
             <ul className="space-y-1.5">
@@ -87,8 +79,6 @@ const Footer = () => {
               ))}
             </ul>
           </div>
-
-          {/* Contact - 2.5 Cols */}
           <div className="lg:col-span-3 lg:text-right flex flex-col lg:items-end">
             <h4 className="text-[#F5F5F6] text-sm uppercase tracking-[0.25em] font-bold mb-6">Emergency</h4>
             <div className="space-y-1 mb-6">
@@ -103,8 +93,6 @@ const Footer = () => {
             </div>
           </div>
         </div>
-
-        {/* Bottom Bar */}
         <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-[#7E878E] text-[10px] tracking-[0.4em] font-medium uppercase">
             © {currentYear} Lakshmi Hospital & Research Centre

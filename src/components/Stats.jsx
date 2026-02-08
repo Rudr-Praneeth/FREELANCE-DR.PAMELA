@@ -48,12 +48,11 @@ const Stats = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
           <div className="max-w-xl">
             <h2 className="font-serif text-4xl sm:text-6xl leading-[1.15] tracking-tight text-white">
-              Four decades of<br />clinical excellence
+              Three decades of<br />clinical excellence
             </h2>
             <p className="mt-6 sm:mt-8 font-sans text-base sm:text-lg leading-relaxed text-white/80">
-              Established in 1982, Lakshmi Hospital has evolved into Kakinada's premier 
-              multi-specialty tertiary care center, pioneering advanced cardiac 
-              interventions and compassionate healthcare in East Godavari.
+              Established in 1999, Lakshmi Hospital has evolved into a premier multi-specialty tertiary care center, 
+              committed to providing holistic neurological services and compassionate healthcare.
             </p>
             <button className="group relative mt-10 sm:mt-12 inline-flex items-center overflow-hidden border border-white/40 px-6 py-3 sm:px-7 sm:py-4 font-sans text-sm font-medium tracking-wide text-white">
               <span className="absolute inset-0 bg-black translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out" />
@@ -65,8 +64,8 @@ const Stats = () => {
           </div>
 
           <div className="grid grid-cols-2 gap-y-12 gap-x-4 sm:gap-x-20">
-            <Stat value="40+" label="Years of Legacy" />
-            <Stat value="1000s" label="Cardiac Procedures" />
+            <Stat value="25+" label="Years of Legacy" />
+            <Stat value="1000s" label="Neurological Procedures" />
             <Stat value="24/7" label="Emergency Care" />
             <Stat value="NABH" label="Quality Certified" />
           </div>
