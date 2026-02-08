@@ -7,14 +7,14 @@ gsap.registerPlugin(ScrollTrigger);
 
 const doctorData = [
   {
-    name: "Dr. D. Pushpalatha",
-    role: "obstetrician & gynaecologist",
-    degrees: "MD",
-    specialty: "Women’s Health & Maternity",
-    experience: "Senior Consultant",
-    bio: "Specialist in comprehensive maternity care and women's health wellness.",
+    name: "Dr. Sriram Chandra Damaraju",
+    role: "Consultant & Neurosurgeon",
+    degrees: "m.ch. (vellore), d.n.b",
+    specialty: "Electrophysiology",
+    experience: "Cardiac Specialist",
+    bio: "Focused on heart rhythm disorders and complex interventional cardiology.",
     image:
-      "https://images.unsplash.com/photo-1559839734-2b71f1536783?q=80&w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=800&auto=format&fit=crop",
   },
   {
     name: "Dr. Pamela Narayan",
@@ -27,14 +27,14 @@ const doctorData = [
       "https://images.unsplash.com/photo-1537368910025-700350fe46c7?q=80&w=800&auto=format&fit=crop",
   },
   {
-    name: "Dr. Sriram Chandra Damaraju",
-    role: "Consultant & Neurosurgeon",
-    degrees: "m.ch. (vellore), d.n.b",
-    specialty: "Electrophysiology",
-    experience: "Cardiac Specialist",
-    bio: "Focused on heart rhythm disorders and complex interventional cardiology.",
+    name: "Dr. D. Pushpalatha",
+    role: "obstetrician & gynaecologist",
+    degrees: "MD",
+    specialty: "Women’s Health & Maternity",
+    experience: "Senior Consultant",
+    bio: "Specialist in comprehensive maternity care and women's health wellness.",
     image:
-      "https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1559839734-2b71f1536783?q=80&w=800&auto=format&fit=crop",
   },
 ];
 
