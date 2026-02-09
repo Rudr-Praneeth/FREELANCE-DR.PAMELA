@@ -67,7 +67,7 @@ const Stats = () => {
             <Stat value="25+" label="Years of Legacy" />
             <Stat value="1000s" label="Neurological Procedures" />
             <Stat value="24/7" label="Emergency Care" />
-            <Stat value="NABH" label="Quality Certified" />
+            <Stat value="Qualified" label="Professional Staff" />
           </div>
         </div>
       </Gutters>

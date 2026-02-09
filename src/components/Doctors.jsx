@@ -14,7 +14,7 @@ const doctorData = [
     experience: "Cardiac Specialist",
     bio: "Focused on heart rhythm disorders and complex interventional cardiology.",
     image:
-      "https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=800&auto=format&fit=crop",
+      "M3.jpg.jpeg",
   },
   {
     name: "Dr. Pamela Narayan",
@@ -24,7 +24,7 @@ const doctorData = [
     experience: "Senior Consultant",
     bio: "Expert in physiotherapy techniques, specializing in rehabilitation, pain management, and mobility restoration.",
     image:
-      "https://images.unsplash.com/photo-1537368910025-700350fe46c7?q=80&w=800&auto=format&fit=crop",
+      "Pamela.jpeg",
   },
   {
     name: "Dr. D. Pushpalatha",
@@ -34,7 +34,7 @@ const doctorData = [
     experience: "Senior Consultant",
     bio: "Specialist in comprehensive maternity care and women's health wellness.",
     image:
-      "https://images.unsplash.com/photo-1559839734-2b71f1536783?q=80&w=800&auto=format&fit=crop",
+      "Pushpalatha.jpeg",
   },
 ];
 

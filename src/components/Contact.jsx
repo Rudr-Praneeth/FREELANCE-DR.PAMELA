@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { FiX } from "react-icons/fi";
+import emailjs from "@emailjs/browser";
 import Gutters from "../layouts/Gutters";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -9,8 +11,14 @@ const Contact = () => {
   const sectionRef = useRef(null);
   const modalRef = useRef(null);
   const overlayRef = useRef(null);
-  const [open, setOpen] = useState(false);
+  const closeRef = useRef(null);
+  const formRef = useRef(null);
 
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+
+  /* CTA scroll animation */
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.fromTo(
@@ -32,6 +40,7 @@ const Contact = () => {
     return () => ctx.revert();
   }, []);
 
+  /* Modal animation */
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "auto";
 
@@ -39,31 +48,44 @@ const Contact = () => {
       gsap.set(overlayRef.current, { display: "flex" });
 
       const tl = gsap.timeline();
-
       tl.fromTo(
         overlayRef.current,
         { opacity: 0 },
         { opacity: 1, duration: 0.35, ease: "power2.out" }
-      ).fromTo(
-        modalRef.current,
-        { y: 40, opacity: 0, scale: 0.92 },
-        { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "power3.out" },
-        "-=0.15"
-      );
+      )
+        .fromTo(
+          modalRef.current,
+          { y: 40, opacity: 0, scale: 0.92 },
+          { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "power3.out" },
+          "-=0.15"
+        )
+        .fromTo(
+          closeRef.current,
+          { rotate: -180, opacity: 0, scale: 0.6 },
+          {
+            rotate: 0,
+            opacity: 1,
+            scale: 1,
+            duration: 0.45,
+            ease: "back.out(1.7)",
+          },
+          "-=0.35"
+        );
     } else {
       gsap.to(modalRef.current, {
         y: 60,
         opacity: 0,
         scale: 0.97,
-        duration: 0.35,
+        duration: 0.3,
         ease: "power2.in",
       });
 
       gsap.to(overlayRef.current, {
         opacity: 0,
-        duration: 0.35,
-        delay: 0.1,
-        onComplete: () => gsap.set(overlayRef.current, { display: "none" }),
+        duration: 0.3,
+        delay: 0.05,
+        onComplete: () =>
+          gsap.set(overlayRef.current, { display: "none" }),
       });
     }
 
@@ -72,9 +94,39 @@ const Contact = () => {
     };
   }, [open]);
 
+  /* EmailJS submit */
+  const handleSubmit = (e) => {
+  e.preventDefault();
+  setLoading(true);
+  emailjs
+    .sendForm(
+      import.meta.env.VITE_EMAILJS_SERVICE,
+      import.meta.env.VITE_EMAILJS_TEMPLATE,
+      formRef.current,
+      import.meta.env.VITE_EMAILJS_PUBLIC
+    )
+    .then(
+      () => {
+        setLoading(false);
+        setSuccess(true);
+        formRef.current.reset();
+
+        setTimeout(() => {
+          setOpen(false);
+          setSuccess(false);
+        }, 2000);
+      },
+      (error) => {
+        console.error("EmailJS error:", error);
+        setLoading(false);
+      }
+    );
+};
+
   return (
     <>
       <section
+        id="contact"
         ref={sectionRef}
         className="relative w-full bg-[#0D0D0D] py-32 flex justify-center overflow-hidden"
       >
@@ -92,9 +144,7 @@ const Contact = () => {
               className="relative group px-10 py-4 border border-white/10 overflow-hidden uppercase tracking-[0.3em] text-xs text-[#F5F5F6]"
             >
               <span className="relative z-10">Contact Us</span>
-
               <div className="absolute inset-0 bg-white scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500" />
-
               <span className="absolute inset-0 flex items-center justify-center text-black opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20">
                 Contact Us
               </span>
@@ -103,10 +153,11 @@ const Contact = () => {
         </Gutters>
       </section>
 
+      {/* MODAL */}
       <div
         ref={overlayRef}
         style={{ display: "none" }}
-        className="fixed inset-0 z-[9999] flex items-center justify-center px-6 bg-[#0D0D0D]/90 backdrop-blur-2xl"
+        className="fixed inset-0 z-[9999] flex items-center justify-center px-6 bg-[#0D0D0D]/70 backdrop-blur-sm"
         onClick={() => setOpen(false)}
       >
         <div
@@ -114,46 +165,67 @@ const Contact = () => {
           onClick={(e) => e.stopPropagation()}
           className="w-full max-w-2xl bg-gradient-to-b from-[#1A1A1A] to-[#111111] border border-white/10 rounded-[36px] shadow-[0_40px_120px_rgba(0,0,0,0.9)] relative"
         >
-          <div className="absolute -inset-1 bg-white/5 blur-2xl rounded-[40px] opacity-60 pointer-events-none" />
+          <div className="pointer-events-none absolute -inset-1 bg-white/5 blur-2xl rounded-[40px] opacity-60" />
+
+          <button
+            ref={closeRef}
+            onClick={() => setOpen(false)}
+            className="absolute top-6 right-6 z-50 text-white/70 hover:text-white hover:rotate-180 transition-all duration-500"
+          >
+            <FiX size={24} />
+          </button>
 
           <div className="relative p-8 md:p-12">
             <h3 className="text-[#F5F5F6] text-3xl font-serif italic mb-10">
               Contact
             </h3>
 
-            <form className="flex flex-col gap-6">
+            <form
+              ref={formRef}
+              onSubmit={handleSubmit}
+              className="flex flex-col gap-6"
+            >
               <input
                 type="text"
+                name="from_name"
                 placeholder="Full Name"
-                className="bg-transparent border-b border-white/10 focus:border-white/40 outline-none py-3 text-[#F5F5F6] placeholder-[#7E878E] transition-colors"
+                required
+                className="bg-transparent border-b border-white/10 focus:border-white/40 outline-none py-3 text-[#F5F5F6]"
               />
 
               <input
                 type="email"
+                name="from_email"
                 placeholder="Email Address"
-                className="bg-transparent border-b border-white/10 focus:border-white/40 outline-none py-3 text-[#F5F5F6] placeholder-[#7E878E] transition-colors"
+                required
+                className="bg-transparent border-b border-white/10 focus:border-white/40 outline-none py-3 text-[#F5F5F6]"
               />
 
               <input
                 type="tel"
+                name="phone"
                 placeholder="Phone Number"
-                className="bg-transparent border-b border-white/10 focus:border-white/40 outline-none py-3 text-[#F5F5F6] placeholder-[#7E878E] transition-colors"
+                className="bg-transparent border-b border-white/10 focus:border-white/40 outline-none py-3 text-[#F5F5F6]"
               />
 
               <textarea
+                name="message"
                 rows="4"
                 placeholder="How can we help you?"
-                className="bg-transparent border-b border-white/10 focus:border-white/40 outline-none py-3 text-[#F5F5F6] placeholder-[#7E878E] transition-colors resize-none"
+                required
+                className="bg-transparent border-b border-white/10 focus:border-white/40 outline-none py-3 text-[#F5F5F6] resize-none"
               />
 
               <button
-                type="button"
-                className="relative mt-6 py-4 border border-white/10 overflow-hidden group uppercase tracking-[0.3em] text-xs text-[#F5F5F6]"
+                type="submit"
+                disabled={loading}
+                className="relative mt-6 py-4 border border-white/10 overflow-hidden group uppercase tracking-[0.3em] text-xs text-[#F5F5F6] disabled:opacity-50"
               >
-                <span className="relative z-10">Send Message</span>
+                <span className="relative z-10">
+                  {loading ? "Sending..." : success ? "Sent ✓" : "Send Message"}
+                </span>
 
                 <div className="absolute inset-0 bg-white scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500" />
-
                 <span className="absolute inset-0 flex items-center justify-center text-black opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20">
                   Send Message
                 </span>

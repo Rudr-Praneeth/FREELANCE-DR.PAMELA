@@ -1,24 +1,19 @@
-import React from 'react'
-import NavBar from './components/NavBar'
-import Hero from './components/Hero'
-import Stats from './components/Stats'
-import Services from './components/Services'
-import Doctors from './components/Doctors'
-import Footer from './components/Footer'
-import Contact from './components/Contact'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import MainLayout from "./layouts/MainLayout";
+import Home from "./pages/Home";
+import WasteManagement from "./pages/wastePage";
 
 const App = () => {
   return (
-    <div className='bg-[#090A10] text-[#F5F5F6] font-sans font-normal text-[14px] leading-[20px] tracking-normal'>
-      <NavBar />
-      <Hero />
-      <Stats />
-      <Services />
-      <Doctors />
-      <Contact />
-      <Footer />
-    </div>
-  )
-}
+    <BrowserRouter>
+      <Routes>
+        <Route element={<MainLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/biomedical-waste" element={<WasteManagement />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
+};
 
-export default App
+export default App;
