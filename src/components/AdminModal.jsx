@@ -16,7 +16,7 @@ const AdminModal = ({ onClose, onSuccess }) => {
   const [rows, setRows] = useState([{ ...emptyRow }]);
 
   const unlock = async () => {
-    const res = await fetch("/api/admin-auth", {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin-auth`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ password })
@@ -63,7 +63,7 @@ const AdminModal = ({ onClose, onSuccess }) => {
 
     if (!payload.length) return;
 
-    await fetch("/api/waste", {
+    await fetch(`${import.meta.env.VITE_API_URL}/api/waste`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)

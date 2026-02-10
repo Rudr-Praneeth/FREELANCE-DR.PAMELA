@@ -12,7 +12,7 @@ const WasteManagement = () => {
   const [showAdmin, setShowAdmin] = useState(false);
 
   const fetchData = async () => {
-    const res = await fetch(`/api/waste?year=${year}`);
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/waste?year=${year}`);
     if (!res.ok) return;
     const json = await res.json();
     setData(json);
