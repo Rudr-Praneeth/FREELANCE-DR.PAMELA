@@ -1,6 +1,68 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import { gsap } from "gsap";
 
-const WasteTable = ({ data }) => {
+const WasteTable = ({ data, loading }) => {
+  const skeletonRef = useRef(null);
+
+  useEffect(() => {
+    if (loading && skeletonRef.current) {
+      // GSAP shimmer animation
+      gsap.fromTo(
+        skeletonRef.current.querySelectorAll(".skeleton-cell"),
+        { backgroundPosition: "-200px 0" },
+        {
+          backgroundPosition: "200px 0",
+          duration: 1.5,
+          ease: "linear",
+          repeat: -1
+        }
+      );
+    }
+  }, [loading]);
+
+  if (loading) {
+    const rows = Array(5).fill(0); // 5 rows placeholder
+    return (
+      <div className="mt-4 flex justify-center">
+        <div
+          ref={skeletonRef}
+          className="w-full max-w-4xl overflow-x-auto border border-white/10 rounded-lg"
+        >
+          <table className="w-full text-sm table-auto">
+            <thead className="bg-white/5">
+              <tr>
+                {["Date", "Red", "Yellow", "Blue", "White", "Total"].map((h, i) => (
+                  <th key={i} className="p-3">{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((_, i) => (
+                <tr key={i} className="border-b border-white/5">
+                  {Array(6).fill(0).map((__, j) => (
+                    <td key={j} className="p-3">
+                      <div className="skeleton-cell h-5 rounded bg-gradient-to-r from-white/5 via-white/20 to-white/5 bg-[length:200%_100%]" />
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+            <tfoot className="bg-white/5 font-semibold">
+              <tr>
+                {Array(6).fill(0).map((_, i) => (
+                  <td key={i} className="p-3">
+                    <div className="skeleton-cell h-5 rounded bg-gradient-to-r from-white/5 via-white/20 to-white/5 bg-[length:200%_100%]" />
+                  </td>
+                ))}
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    );
+  }
+
+  // Real table
   const totals = data.reduce(
     (a, c) => ({
       red: a.red + c.red,
@@ -11,13 +73,12 @@ const WasteTable = ({ data }) => {
     { red: 0, yellow: 0, blue: 0, white: 0 }
   );
 
-  const grandTotal =
-    totals.red + totals.yellow + totals.blue + totals.white;
+  const grandTotal = totals.red + totals.yellow + totals.blue + totals.white;
 
   return (
-    <div className="mt-12 flex justify-center">
+    <div className="mt-4 flex justify-center fade-in">
       <div className="w-full max-w-4xl overflow-x-auto border border-white/10 rounded-lg">
-        <table className="w-full text-sm">
+        <table className="w-full text-sm table-auto">
           <thead className="bg-white/5">
             <tr>
               <th className="p-3">Date</th>
