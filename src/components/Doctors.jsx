@@ -10,7 +10,7 @@ const doctorData = [
     name: "Dr. Sriram Chandra Damaraju",
     role: "Consultant & Neurosurgeon",
     degrees: "m.ch. (vellore), d.n.b",
-    specialty: "Electrophysiology",
+    specialty: "Neurosurgery & Neurocritical Care",
     experience: "Neuro Specialist",
     bio: "Focused on heart rhythm disorders and complex interventional cardiology.",
     image: "M3.jpg.jpeg",
