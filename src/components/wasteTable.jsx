@@ -8,7 +8,7 @@ const WasteTable = ({ data }) => {
       blue: a.blue + c.blue,
       white: a.white + c.white
     }),
-    { red: 0, yellow: 0, blue: 0, white: 0 }
+    { red: 0, yellow: 0, blue: 0, white: 0 } 
   );
 
   const grandTotal = totals.red + totals.yellow + totals.blue + totals.white;
