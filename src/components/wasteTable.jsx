@@ -1,6 +1,6 @@
 import React from "react";
 
-const WasteTable = ({ data }) => {
+const wasteTable = ({ data }) => {
   const totals = data.reduce(
     (a, c) => ({
       red: a.red + c.red,
@@ -57,4 +57,4 @@ const WasteTable = ({ data }) => {
   );
 };
 
-export default WasteTable;
+export default wasteTable;

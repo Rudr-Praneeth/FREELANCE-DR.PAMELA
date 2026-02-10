@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Gutters from "../layouts/Gutters";
-import WasteTable from "../components/WasteTable";
+import wasteTable from "../components/wasteTable";
 import NavBar from "../components/NavBar";
 import AdminModal from "../components/AdminModal";
 
@@ -63,7 +63,7 @@ const WasteManagement = () => {
             </select>
           </div>
 
-          {month && <WasteTable data={data[month]} />}
+          {month && <wasteTable data={data[month]} />}
         </div>
       </Gutters>
 
