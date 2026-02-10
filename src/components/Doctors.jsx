@@ -12,7 +12,7 @@ const doctorData = [
     degrees: "m.ch. (vellore), d.n.b",
     specialty: "Neurosurgery & Neurocritical Care",
     experience: "Neuro Specialist",
-    bio: "Focused on heart rhythm disorders and complex interventional cardiology.",
+    bio: "Specialist in complex neurosurgical procedures and neurocritical care management.",
     image: "M3.jpg.jpeg",
   },
   {
