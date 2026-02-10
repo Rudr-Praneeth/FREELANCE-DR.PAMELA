@@ -83,7 +83,7 @@ const Footer = () => {
             <h4 className="text-[#F5F5F6] text-sm uppercase tracking-[0.25em] font-bold mb-6">Emergency</h4>
             <div className="space-y-1 mb-6">
               <p className="text-[#7E878E] text-[10px] uppercase tracking-[0.3em] font-semibold">24/7 Trauma Care</p>
-              <a href="tel:08842376666" className="text-2xl font-sans font-bold text-[#F5F5F6] hover:tracking-wider transition-all duration-500 block">
+              <a href="tel:9390716980" className="text-2xl font-sans font-bold text-[#F5F5F6] hover:tracking-wider transition-all duration-500 block">
                 +91-9390716980
               </a>
             </div>

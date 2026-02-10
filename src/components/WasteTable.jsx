@@ -1,6 +1,6 @@
 import React from "react";
 
-const wasteTable = ({ data }) => {
+const WasteTable = ({ data }) => {
   const totals = data.reduce(
     (a, c) => ({
       red: a.red + c.red,
@@ -8,10 +8,11 @@ const wasteTable = ({ data }) => {
       blue: a.blue + c.blue,
       white: a.white + c.white
     }),
-    { red: 0, yellow: 0, blue: 0, white: 0 } 
+    { red: 0, yellow: 0, blue: 0, white: 0 }
   );
 
-  const grandTotal = totals.red + totals.yellow + totals.blue + totals.white;
+  const grandTotal =
+    totals.red + totals.yellow + totals.blue + totals.white;
 
   return (
     <div className="mt-12 flex justify-center">
@@ -57,4 +58,4 @@ const wasteTable = ({ data }) => {
   );
 };
 
-export default wasteTable;
+export default WasteTable;
