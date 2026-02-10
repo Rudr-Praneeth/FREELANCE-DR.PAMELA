@@ -13,7 +13,7 @@ const NavBar = () => {
   }, []);
 
   const links = [
-    { name: "Home", to: "/" },
+    { name: "Home", to: "/#home" },
     { name: "Services", to: "/#services" },
     { name: "Doctors", to: "/#doctors" },
   ];
@@ -32,14 +32,21 @@ const NavBar = () => {
       </div>
 
       <div className="max-w-[1400px] mx-auto flex items-center justify-between">
-        <Link to="/" className="flex flex-col cursor-pointer group">
-          <span className="text-sm md:text-lg font-bold tracking-tighter text-white leading-none">
-            LAKSHMI HOSPITAL
-          </span>
-          <span className="text-[10px] md:text-[11px] font-medium tracking-[0.2em] text-[#7E878E] group-hover:text-[#F5F5F6] transition-colors">
-            & RESEARCH CENTRE
-          </span>
-        </Link>
+        <HashLink smooth to="/#home" className="flex items-center gap-2 cursor-pointer group">
+          <img
+            src="/logo.jpeg"
+            alt="Lakshmi Hospital Logo"
+            className="h-6 md:h-8 w-auto object-contain"
+          />
+          <div className="flex flex-col">
+            <span className="text-sm md:text-lg font-bold tracking-tighter text-white leading-none">
+              LAKSHMI HOSPITAL
+            </span>
+            <span className="text-[10px] md:text-[11px] font-medium tracking-[0.2em] text-[#7E878E] group-hover:text-[#F5F5F6] transition-colors">
+              & RESEARCH CENTRE
+            </span>
+          </div>
+        </HashLink>
 
         <div className="hidden items-center gap-8 lg:flex">
           {links.map((link) =>
