@@ -36,13 +36,13 @@ const Stats = () => {
             duration: 1,
             ease: "power2.inOut",
             delay: index * 0.1,
-          },
+          }
         )
           .fromTo(
             content,
             { clipPath: "inset(0 0 0 100%)" },
             { clipPath: "inset(0 0 0 0%)", duration: 1, ease: "power2.inOut" },
-            "<",
+            "<"
           )
           .to(glow, { opacity: 0.3, duration: 0.5 });
       });
@@ -54,34 +54,38 @@ const Stats = () => {
   return (
     <section
       ref={sectionRef}
-      className="py-24 bg-gradient-to-b from-[#3B466B] to-[#7E878E] flex items-center overflow-hidden"
+      className="py-24 bg-gradient-to-b from-white to-[#eaf4fb] flex items-center overflow-hidden"
     >
       <Gutters>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
+          {/* LEFT CONTENT */}
           <div className="max-w-xl">
-            <h2 className="font-serif text-4xl sm:text-6xl leading-[1.15] tracking-tight text-white">
+            <h2 className="font-serif text-4xl sm:text-6xl leading-[1.15] tracking-tight text-black">
               Three decades of
               <br />
-              clinical excellence
+              <span className="text-[#4292C7]">clinical excellence</span>
             </h2>
-            <p className="mt-6 sm:mt-8 font-sans text-base sm:text-lg leading-relaxed text-white/80">
+
+            <p className="mt-6 sm:mt-8 font-sans text-base sm:text-lg leading-relaxed text-black/70">
               Established in 1999, Lakshmi Hospital has evolved into a premier
               multi-specialty tertiary care center, committed to providing
               holistic neurological services and compassionate healthcare.
             </p>
+
             <HashLink
               smooth
               to="/#services"
-              className="group relative mt-10 sm:mt-12 inline-flex items-center overflow-hidden border border-white/40 px-6 py-3 sm:px-7 sm:py-4 font-sans text-sm font-medium tracking-wide text-white"
+              className="group relative mt-10 sm:mt-12 inline-flex items-center overflow-hidden border border-black px-6 py-3 sm:px-7 sm:py-4 font-sans text-sm font-medium tracking-wide bg-[#4292C7] text-white transition-colors duration-300"
             >
-              <span className="absolute inset-0 bg-black translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out" />
-              <span className="relative z-10 flex items-center gap-3">
+              <span className="absolute inset-0 bg-[#FFCA08] translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out" />
+              <span className="relative z-10 flex items-center gap-3 group-hover:text-black transition-colors duration-300">
                 Our Departments
                 <span className="text-lg">→</span>
               </span>
             </HashLink>
           </div>
 
+          {/* RIGHT STATS */}
           <div className="grid grid-cols-2 gap-y-12 gap-x-4 sm:gap-x-20">
             <Stat value="25+" label="Years of Legacy" />
             <Stat value="1000s" label="Neurological Procedures" />
@@ -97,14 +101,15 @@ const Stats = () => {
 const Stat = ({ value, label }) => {
   return (
     <div className="stat-item relative pl-4 sm:pl-6">
-      <div className="scan-line absolute left-0 top-1 h-10 sm:h-12 w-px bg-white z-20" />
-      <div className="line-glow absolute left-0 top-1 h-10 sm:h-12 w-[3px] bg-white blur-[6px] shadow-[0_0_20px_2px_rgba(255,255,255,0.9)] z-10" />
+      {/* Blue scan line */}
+      <div className="scan-line absolute left-0 top-1 h-10 sm:h-12 w-px bg-[#4292C7] z-20" />
+      <div className="line-glow absolute left-0 top-1 h-10 sm:h-12 w-[3px] bg-[#4292C7] blur-[6px] shadow-[0_0_20px_2px_rgba(66,146,199,0.6)] z-10" />
 
       <div className="stat-content">
-        <div className="font-sans text-2xl sm:text-5xl font-semibold tracking-tight tabular-nums lining-nums text-white">
+        <div className="font-sans text-2xl sm:text-5xl font-semibold tracking-tight tabular-nums lining-nums text-black">
           {value}
         </div>
-        <div className="mt-2 sm:mt-3 font-sans text-[10px] sm:text-sm uppercase tracking-widest sm:tracking-wide text-white/70">
+        <div className="mt-2 sm:mt-3 font-sans text-[10px] sm:text-sm uppercase tracking-widest sm:tracking-wide text-black/60">
           {label}
         </div>
       </div>

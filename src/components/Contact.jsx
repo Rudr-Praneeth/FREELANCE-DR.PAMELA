@@ -51,38 +51,30 @@ const Contact = () => {
       tl.fromTo(
         overlayRef.current,
         { opacity: 0 },
-        { opacity: 1, duration: 0.35, ease: "power2.out" }
+        { opacity: 1, duration: 0.3 }
       )
         .fromTo(
           modalRef.current,
-          { y: 40, opacity: 0, scale: 0.92 },
-          { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "power3.out" },
+          { y: 40, opacity: 0, scale: 0.95 },
+          { y: 0, opacity: 1, scale: 1, duration: 0.45, ease: "power3.out" },
           "-=0.15"
         )
         .fromTo(
           closeRef.current,
-          { rotate: -180, opacity: 0, scale: 0.6 },
-          {
-            rotate: 0,
-            opacity: 1,
-            scale: 1,
-            duration: 0.45,
-            ease: "back.out(1.7)",
-          },
-          "-=0.35"
+          { rotate: -180, opacity: 0 },
+          { rotate: 0, opacity: 1, duration: 0.4, ease: "back.out(1.7)" },
+          "-=0.3"
         );
     } else {
       gsap.to(modalRef.current, {
-        y: 60,
+        y: 40,
         opacity: 0,
-        scale: 0.97,
-        duration: 0.3,
-        ease: "power2.in",
+        duration: 0.25,
       });
 
       gsap.to(overlayRef.current, {
         opacity: 0,
-        duration: 0.3,
+        duration: 0.25,
         delay: 0.05,
         onComplete: () =>
           gsap.set(overlayRef.current, { display: "none" }),
@@ -96,58 +88,59 @@ const Contact = () => {
 
   /* EmailJS submit */
   const handleSubmit = (e) => {
-  e.preventDefault();
-  setLoading(true);
-  emailjs
-    .sendForm(
-      import.meta.env.VITE_EMAILJS_SERVICE,
-      import.meta.env.VITE_EMAILJS_TEMPLATE,
-      formRef.current,
-      import.meta.env.VITE_EMAILJS_PUBLIC
-    )
-    .then(
-      () => {
-        setLoading(false);
-        setSuccess(true);
-        formRef.current.reset();
+    e.preventDefault();
+    setLoading(true);
 
-        setTimeout(() => {
-          setOpen(false);
-          setSuccess(false);
-        }, 2000);
-      },
-      (error) => {
-        console.error("EmailJS error:", error);
-        setLoading(false);
-      }
-    );
-};
+    emailjs
+      .sendForm(
+        import.meta.env.VITE_EMAILJS_SERVICE,
+        import.meta.env.VITE_EMAILJS_TEMPLATE,
+        formRef.current,
+        import.meta.env.VITE_EMAILJS_PUBLIC
+      )
+      .then(
+        () => {
+          setLoading(false);
+          setSuccess(true);
+          formRef.current.reset();
+
+          setTimeout(() => {
+            setOpen(false);
+            setSuccess(false);
+          }, 2000);
+        },
+        (error) => {
+          console.error("EmailJS error:", error);
+          setLoading(false);
+        }
+      );
+  };
 
   return (
     <>
+      {/* SECTION */}
       <section
         id="contact"
         ref={sectionRef}
-        className="relative w-full bg-[#0D0D0D] py-32 flex justify-center overflow-hidden"
+        className="relative w-full bg-gradient-to-b from-white to-[#eaf4fb] py-32 flex justify-center overflow-hidden"
       >
         <Gutters>
           <div className="contact-cta flex flex-col items-center text-center">
-            <h2 className="text-[#F5F5F6] font-serif italic text-4xl md:text-6xl tracking-tight mb-8 leading-tight">
+            <h2 className="text-black font-serif italic text-4xl md:text-6xl tracking-tight mb-8 leading-tight">
               Let’s Begin Your
-              <span className="block font-sans not-italic uppercase text-base tracking-[0.35em] opacity-40 mt-4">
+              <span className="block font-sans not-italic uppercase text-base tracking-[0.35em] text-[#4292C7] mt-4">
                 Care Journey
               </span>
             </h2>
 
             <button
               onClick={() => setOpen(true)}
-              className="relative group px-10 py-4 border border-white/10 overflow-hidden uppercase tracking-[0.3em] text-xs text-[#F5F5F6]"
+              className="relative group px-10 py-4 border border-black bg-[#4292C7] overflow-hidden uppercase tracking-[0.3em] text-xs text-white"
             >
-              <span className="relative z-10">Contact Us</span>
-              <div className="absolute inset-0 bg-white scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500" />
-              <span className="absolute inset-0 flex items-center justify-center text-black opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20">
+              <span className="relative z-10 group-hover:text-black transition-colors duration-300">
                 Contact Us
               </span>
+              <div className="absolute inset-0 bg-[#FFCA08] translate-y-full group-hover:translate-y-0 transition-transform duration-400" />
             </button>
           </div>
         </Gutters>
@@ -157,26 +150,24 @@ const Contact = () => {
       <div
         ref={overlayRef}
         style={{ display: "none" }}
-        className="fixed inset-0 z-[9999] flex items-center justify-center px-6 bg-[#0D0D0D]/70 backdrop-blur-sm"
+        className="fixed inset-0 z-[9999] flex items-center justify-center px-6 bg-black/40 backdrop-blur-sm"
         onClick={() => setOpen(false)}
       >
         <div
           ref={modalRef}
           onClick={(e) => e.stopPropagation()}
-          className="w-full max-w-2xl bg-gradient-to-b from-[#1A1A1A] to-[#111111] border border-white/10 rounded-[36px] shadow-[0_40px_120px_rgba(0,0,0,0.9)] relative"
+          className="w-full max-w-2xl bg-white border border-black/10 rounded-[32px] shadow-2xl relative"
         >
-          <div className="pointer-events-none absolute -inset-1 bg-white/5 blur-2xl rounded-[40px] opacity-60" />
-
           <button
             ref={closeRef}
             onClick={() => setOpen(false)}
-            className="absolute top-6 right-6 z-50 text-white/70 hover:text-white hover:rotate-180 transition-all duration-500"
+            className="absolute top-6 right-6 text-black/60 hover:text-black transition-all duration-300"
           >
             <FiX size={24} />
           </button>
 
-          <div className="relative p-8 md:p-12">
-            <h3 className="text-[#F5F5F6] text-3xl font-serif italic mb-10">
+          <div className="p-8 md:p-12">
+            <h3 className="text-black text-3xl font-serif italic mb-10">
               Contact
             </h3>
 
@@ -190,7 +181,7 @@ const Contact = () => {
                 name="from_name"
                 placeholder="Full Name"
                 required
-                className="bg-transparent border-b border-white/10 focus:border-white/40 outline-none py-3 text-[#F5F5F6]"
+                className="bg-transparent border-b border-black/20 focus:border-[#4292C7] outline-none py-3 text-black"
               />
 
               <input
@@ -198,14 +189,14 @@ const Contact = () => {
                 name="from_email"
                 placeholder="Email Address"
                 required
-                className="bg-transparent border-b border-white/10 focus:border-white/40 outline-none py-3 text-[#F5F5F6]"
+                className="bg-transparent border-b border-black/20 focus:border-[#4292C7] outline-none py-3 text-black"
               />
 
               <input
                 type="tel"
                 name="phone"
                 placeholder="Phone Number"
-                className="bg-transparent border-b border-white/10 focus:border-white/40 outline-none py-3 text-[#F5F5F6]"
+                className="bg-transparent border-b border-black/20 focus:border-[#4292C7] outline-none py-3 text-black"
               />
 
               <textarea
@@ -213,22 +204,19 @@ const Contact = () => {
                 rows="4"
                 placeholder="How can we help you?"
                 required
-                className="bg-transparent border-b border-white/10 focus:border-white/40 outline-none py-3 text-[#F5F5F6] resize-none"
+                className="bg-transparent border-b border-black/20 focus:border-[#4292C7] outline-none py-3 text-black resize-none"
               />
 
               <button
                 type="submit"
                 disabled={loading}
-                className="relative mt-6 py-4 border border-white/10 overflow-hidden group uppercase tracking-[0.3em] text-xs text-[#F5F5F6] disabled:opacity-50"
+                className="relative mt-6 py-4 border border-black bg-[#4292C7] overflow-hidden group uppercase tracking-[0.3em] text-xs text-white disabled:opacity-50"
               >
-                <span className="relative z-10">
+                <span className="relative z-10 group-hover:text-black transition-colors duration-300">
                   {loading ? "Sending..." : success ? "Sent ✓" : "Send Message"}
                 </span>
 
-                <div className="absolute inset-0 bg-white scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500" />
-                <span className="absolute inset-0 flex items-center justify-center text-black opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20">
-                  Send Message
-                </span>
+                <div className="absolute inset-0 bg-[#FFCA08] translate-y-full group-hover:translate-y-0 transition-transform duration-400" />
               </button>
             </form>
           </div>
