@@ -92,12 +92,12 @@ const Services = () => {
   }, [])
 
   return (
-    <section ref={containerRef} id="services" className='min-h-screen bg-gradient-to-b from-[#7E878E] to-[#E1E0DB] pb-16 overflow-hidden flex items-center'>
+    <section ref={containerRef} id="services" className='min-h-screen bg-gradient-to-b from-[#F8FAFC] to-[#E0F2FE] pb-16 overflow-hidden flex items-center'>
       <Gutters>
         <div className="flex flex-col items-center text-center mb-12">
-          <span className="text-[10px] font-sans tracking-[0.5em] text-[#1A1A1A]/40 uppercase mb-2 font-bold">Expertise</span>
-          <h2 className="font-serif text-5xl md:text-6xl text-[#1A1A1A] tracking-tight">
-            Departments & <span className="italic opacity-70">Services</span>
+          <span className="text-[10px] font-sans tracking-[0.5em] text-[#0F172A]/40 uppercase mb-2 font-bold">Expertise</span>
+          <h2 className="font-serif text-5xl md:text-6xl text-[#0F172A] tracking-tight">
+            Departments & <span className="italic opacity-70 text-[#1E40AF]">Services</span>
           </h2>
         </div>
 
@@ -105,18 +105,18 @@ const Services = () => {
           {servicesList.map((service, idx) => (
             <div key={idx} className="service-card group relative p-5 min-h-[140px] flex flex-col justify-center cursor-default">
               
-              <div className="glass-bg absolute inset-0 bg-black/40 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.2)] rounded-sm pointer-events-none transition-colors duration-500 group-hover:bg-black/60" />
+              <div className="glass-bg absolute inset-0 bg-[#F8FAFC]/40 backdrop-blur-xl border border-[#1E40AF]/10 shadow-[0_8px_32px_rgba(30,64,175,0.2)] rounded-sm pointer-events-none transition-colors duration-500 group-hover:bg-[#E0F2FE]/60" />
               
               <div className="relative w-full mb-1 z-10">
-                <div className="scan-line absolute left-0 top-0 h-full w-[1.5px] bg-white z-20" />
-                <div className="line-glow absolute left-0 top-0 h-full w-[5px] bg-white blur-[6px] shadow-[0_0_12px_rgba(255,255,255,0.8)] z-10" />
+                <div className="scan-line absolute left-0 top-0 h-full w-[1.5px] bg-[#1E40AF] z-20" />
+                <div className="line-glow absolute left-0 top-0 h-full w-[5px] bg-[#38BDF8] blur-[6px] shadow-[0_0_12px_rgba(56,189,248,0.8)] z-10" />
                 
-                <h3 className="card-heading pl-5 font-serif text-xl text-[#F5F5F6] leading-tight font-medium tracking-tight">
+                <h3 className="card-heading pl-5 font-serif text-xl text-[#1E40AF] leading-tight font-medium tracking-tight">
                   {service.title}
                 </h3>
               </div>
               
-              <p className="card-desc pl-5 font-sans text-xs md:text-sm text-white/60 leading-snug font-normal relative z-10">
+              <p className="card-desc pl-5 font-sans text-xs md:text-sm text-[#0F172A]/60 leading-snug font-normal relative z-10">
                 {service.desc}
               </p>
             </div>

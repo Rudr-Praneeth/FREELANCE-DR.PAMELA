@@ -111,14 +111,14 @@ const Doctors = () => {
     <section
       ref={sectionRef}
       id="doctors"
-      className="relative min-h-screen w-full bg-[#0D0D0D] flex items-center overflow-hidden py-12 md:py-24 lg:py-32"
+      className="relative min-h-screen w-full bg-[#F8FAFC] flex items-center overflow-hidden py-12 md:py-24 lg:py-32"
     >
       <Gutters>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-start lg:items-center">
           <div className="lg:col-span-4 flex flex-col gap-1 z-20">
-            <h2 className="font-sans font-bold text-4xl md:text-5xl text-[#F5F5F6] mb-8 uppercase tracking-tighter">
+            <h2 className="font-sans font-bold text-4xl md:text-5xl text-[#1E40AF] mb-8 uppercase tracking-tighter">
               Our{" "}
-              <span className="font-serif italic font-normal opacity-50">
+              <span className="font-serif italic font-normal opacity-60 text-[#0EA5A4]">
                 Team
               </span>
             </h2>
@@ -133,28 +133,28 @@ const Doctors = () => {
                     onPointerEnter={() => changeDoctor(doc)}
                     onClick={() => changeDoctor(doc)}
                     className={`doctor-row group relative pl-6 py-4 text-left cursor-pointer overflow-hidden transition-opacity duration-300 
-                    ${isActive ? "opacity-100" : "opacity-30 hover:opacity-100"}`}
+                    ${isActive ? "opacity-100" : "opacity-40 hover:opacity-100"}`}
                   >
                     <div
                       className={`scan-line absolute left-0 top-0 h-full w-px z-20 transition-colors duration-300 
-                      ${isActive ? "bg-[#F5F5F6]" : "bg-[#F5F5F6]/40 group-hover:bg-[#F5F5F6]"}`}
+                      ${isActive ? "bg-[#1E40AF]" : "bg-[#1E40AF]/40 group-hover:bg-[#1E40AF]"}`}
                     />
 
                     <div
                       className={`line-glow absolute left-0 top-0 h-full w-[2px] blur-[4px] z-10 transition-opacity duration-300
-                      ${isActive ? "opacity-100 bg-[#F5F5F6]" : "opacity-0 group-hover:opacity-100 bg-[#F5F5F6]"}`}
+                      ${isActive ? "opacity-100 bg-[#38BDF8]" : "opacity-0 group-hover:opacity-100 bg-[#38BDF8]"}`}
                     />
 
                     <div className="row-content relative z-10">
                       <h3
                         className={`text-base md:text-lg font-medium tracking-tight leading-tight uppercase transition-colors duration-300
-                        ${isActive ? "text-white" : "text-[#F5F5F6]/70 group-hover:text-white"}`}
+                        ${isActive ? "text-[#0F172A]" : "text-[#0F172A]/70 group-hover:text-[#0F172A]"}`}
                       >
                         {doc.name}
                       </h3>
                       <p
                         className={`text-[9px] uppercase tracking-widest mt-1 font-bold transition-colors duration-300
-                        ${isActive ? "text-[#7E878E]" : "text-[#7E878E]/60 group-hover:text-[#7E878E]"}`}
+                        ${isActive ? "text-[#0EA5A4]" : "text-[#0EA5A4]/60 group-hover:text-[#0EA5A4]"}`}
                       >
                         {doc.degrees}
                       </p>
@@ -167,8 +167,8 @@ const Doctors = () => {
 
           <div
             ref={cardRef}
-            className="lg:col-span-8 h-auto lg:h-[65vh] bg-[#141414] 
-            border-t border-x lg:border-l lg:border-y border-white/5 
+            className="lg:col-span-8 h-auto lg:h-[65vh] bg-[#FFFFFF] 
+            border-t border-x lg:border-l lg:border-y border-[#0F172A]/5 
             rounded-t-[40px] lg:rounded-t-none lg:rounded-tl-[80px] lg:rounded-bl-[80px] 
             shadow-2xl overflow-hidden relative"
           >
@@ -176,50 +176,50 @@ const Doctors = () => {
               ref={fadeRef}
               className="h-full flex flex-col lg:flex-row"
             >
-              <div className="w-full lg:w-[42%] h-[420px] sm:h-[520px] lg:h-full relative overflow-hidden bg-black">
+              <div className="w-full lg:w-[42%] h-[420px] sm:h-[520px] lg:h-full relative overflow-hidden bg-[#F8FAFC]">
                 <img
                   key={activeDoctor.image}
                   src={activeDoctor.image}
                   alt={activeDoctor.name}
-                  className="w-full h-full object-cover object-[50%_20%] grayscale brightness-90"
+                  className="w-full h-full object-cover object-[50%_20%] brightness-90"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-[#141414] via-transparent to-transparent" />
+                {/* <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-[#FFFFFF] via-transparent to-transparent" /> */}
               </div>
 
               <div className="w-full lg:w-[58%] flex items-center">
                 <div className="w-full px-6 md:px-10 lg:px-12 py-8 lg:py-10">
-                  <span className="text-[#7E878E] text-[9px] uppercase tracking-[0.35em] mb-2 block font-bold">
+                  <span className="text-[#0EA5A4] text-[9px] uppercase tracking-[0.35em] mb-2 block font-bold">
                     {activeDoctor.role}
                   </span>
 
-                  <h4 className="text-[#F5F5F6] text-2xl md:text-3xl lg:text-4xl font-serif italic mb-5 leading-snug">
+                  <h4 className="text-[#1E40AF] text-2xl md:text-3xl lg:text-4xl font-serif italic mb-5 leading-snug">
                     {activeDoctor.name}
                   </h4>
 
                   <div className="space-y-5 max-w-md">
                     <div>
-                      <h5 className="text-[#F5F5F6]/30 text-[8px] uppercase tracking-[0.25em] mb-1 font-bold">
+                      <h5 className="text-[#1E40AF]/40 text-[8px] uppercase tracking-[0.25em] mb-1 font-bold">
                         Primary Specialty
                       </h5>
-                      <p className="text-[#F5F5F6] text-xs font-light leading-relaxed uppercase tracking-wide">
+                      <p className="text-[#0F172A] text-xs font-light leading-relaxed uppercase tracking-wide">
                         {activeDoctor.specialty}
                       </p>
                     </div>
 
                     <div>
-                      <h5 className="text-[#F5F5F6]/30 text-[8px] uppercase tracking-[0.25em] mb-1 font-bold">
+                      <h5 className="text-[#1E40AF]/40 text-[8px] uppercase tracking-[0.25em] mb-1 font-bold">
                         Biography
                       </h5>
-                      <p className="text-[#7E878E] text-xs leading-relaxed italic">
+                      <p className="text-[#0F172A]/70 text-xs leading-relaxed italic">
                         {activeDoctor.bio}
                       </p>
                     </div>
 
-                    <div className="pt-4 border-t border-white/5">
-                      <h5 className="text-[#F5F5F6]/30 text-[8px] uppercase tracking-[0.25em] mb-1 font-bold">
+                    <div className="pt-4 border-t border-[#0F172A]/5">
+                      <h5 className="text-[#1E40AF]/40 text-[8px] uppercase tracking-[0.25em] mb-1 font-bold">
                         Experience
                       </h5>
-                      <p className="text-[#F5F5F6] text-xl md:text-2xl font-serif italic">
+                      <p className="text-[#1E40AF] text-xl md:text-2xl font-serif italic">
                         {activeDoctor.experience}
                       </p>
                     </div>
