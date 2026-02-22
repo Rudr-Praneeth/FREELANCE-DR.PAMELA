@@ -1,237 +1,104 @@
-import React, { useEffect, useRef, useState } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Gutters from "../layouts/Gutters";
+import { useRef, useState, useEffect } from "react";
+import gsap from "gsap";
 
-gsap.registerPlugin(ScrollTrigger);
+export default function TestimonialSlider({ data = [] }) {
+  const sliderRef = useRef(null);
+  const [index, setIndex] = useState(0);
 
-const doctorData = [
-  {
-    name: "Dr. Sriram Chandra Damaraju",
-    role: "Consultant & Neurosurgeon",
-    degrees: "m.ch. (vellore), d.n.b",
-    specialty: "Neurosurgery & Neurocritical Care",
-    experience: "Neuro Specialist",
-    bio: "Specialist in complex neurosurgical procedures and neurocritical care management.",
-    image: "M3.jpg.jpeg",
-  },
-  {
-    name: "Dr. Pamela Narayan",
-    role: "Consultant Physiotherapist",
-    degrees: "B.P.T. (Vellore), M.Sc. (London)",
-    specialty: "Physiotherapy & Rehabilitation",
-    experience: "Senior Consultant",
-    bio: "Expert in physiotherapy techniques, specializing in rehabilitation, pain management, and mobility restoration.",
-    image: "Pamela.jpeg",
-  },
-  {
-    name: "Dr. D. Pushpalatha",
-    role: "obstetrician & gynaecologist",
-    degrees: "MD",
-    specialty: "Women’s Health & Maternity",
-    experience: "Senior Consultant",
-    bio: "Specialist in comprehensive maternity care and women's health wellness.",
-    image: "Pushpalatha.jpeg",
-  },
-];
-
-const Doctors = () => {
-  const sectionRef = useRef(null);
-  const cardRef = useRef(null);
-  const fadeRef = useRef(null);
-  const tlRef = useRef(null);
-  const [activeDoctor, setActiveDoctor] = useState(doctorData[0]);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      const items = gsap.utils.toArray(".doctor-row");
-
-      const masterTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-          toggleActions: "play none none reverse",
-        },
-      });
-
-      items.forEach((item, index) => {
-        const line = item.querySelector(".scan-line");
-        const content = item.querySelector(".row-content");
-        const glow = item.querySelector(".line-glow");
-
-        masterTl
-          .fromTo(
-            [line, glow],
-            { x: "2rem", opacity: 0 },
-            { x: 0, opacity: 1, duration: 0.6, ease: "power2.out" },
-            index * 0.1
-          )
-          .fromTo(
-            content,
-            { clipPath: "inset(0 0 0 100%)" },
-            { clipPath: "inset(0 0 0 0%)", duration: 0.6, ease: "power2.out" },
-            "<"
-          );
-      });
-
-      masterTl.fromTo(
-        cardRef.current,
-        { y: 50, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1, ease: "expo.out" },
-        0.2
-      );
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
-
-  const changeDoctor = (doctor) => {
-    if (doctor.name === activeDoctor.name) return;
-
-    if (tlRef.current) tlRef.current.kill();
-
-    const tl = gsap.timeline();
-    tlRef.current = tl;
-
-    tl.to(fadeRef.current, {
-      opacity: 0,
-      y: 8,
-      duration: 0.18,
-      ease: "power2.out",
-    })
-      .add(() => setActiveDoctor(doctor))
-      .fromTo(
-        fadeRef.current,
-        { opacity: 0, y: -8 },
-        { opacity: 1, y: 0, duration: 0.28, ease: "power2.out" }
-      );
+  const next = () => {
+    setIndex((prev) => (prev + 1) % data.length);
   };
 
+  const prev = () => {
+    setIndex((prev) => (prev === 0 ? data.length - 1 : prev - 1));
+  };
+
+  useEffect(() => {
+    if (!data.length) return;
+
+    gsap.to(sliderRef.current, {
+      xPercent: -100 * index,
+      duration: 0.8,
+      ease: "power3.inOut",
+    });
+  }, [index, data.length]);
+
+  if (!data.length) return null;
+
   return (
-    <section
-      ref={sectionRef}
-      id="doctors"
-      className="relative min-h-screen w-full bg-[#F8FAFC] flex items-center overflow-hidden py-12 md:py-24 lg:py-32"
-    >
-      <Gutters>
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-start lg:items-center">
-          <div className="lg:col-span-4 flex flex-col gap-1 z-20">
-            <h2 className="font-sans font-bold text-4xl md:text-5xl text-[#1E40AF] mb-8 uppercase tracking-tighter">
-              Our{" "}
-              <span className="font-serif italic font-normal opacity-60 text-[#0EA5A4]">
-                Team
-              </span>
-            </h2>
-
-            <div className="flex flex-col">
-              {doctorData.map((doc, index) => {
-                const isActive = activeDoctor.name === doc.name;
-
-                return (
-                  <button
-                    key={index}
-                    onPointerEnter={() => changeDoctor(doc)}
-                    onClick={() => changeDoctor(doc)}
-                    className={`doctor-row group relative pl-6 py-4 text-left cursor-pointer overflow-hidden transition-opacity duration-300 
-                    ${isActive ? "opacity-100" : "opacity-40 hover:opacity-100"}`}
-                  >
-                    <div
-                      className={`scan-line absolute left-0 top-0 h-full w-px z-20 transition-colors duration-300 
-                      ${isActive ? "bg-[#1E40AF]" : "bg-[#1E40AF]/40 group-hover:bg-[#1E40AF]"}`}
-                    />
-
-                    <div
-                      className={`line-glow absolute left-0 top-0 h-full w-[2px] blur-[4px] z-10 transition-opacity duration-300
-                      ${isActive ? "opacity-100 bg-[#38BDF8]" : "opacity-0 group-hover:opacity-100 bg-[#38BDF8]"}`}
-                    />
-
-                    <div className="row-content relative z-10">
-                      <h3
-                        className={`text-base md:text-lg font-medium tracking-tight leading-tight uppercase transition-colors duration-300
-                        ${isActive ? "text-[#0F172A]" : "text-[#0F172A]/70 group-hover:text-[#0F172A]"}`}
-                      >
-                        {doc.name}
-                      </h3>
-                      <p
-                        className={`text-[9px] uppercase tracking-widest mt-1 font-bold transition-colors duration-300
-                        ${isActive ? "text-[#0EA5A4]" : "text-[#0EA5A4]/60 group-hover:text-[#0EA5A4]"}`}
-                      >
-                        {doc.degrees}
-                      </p>
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          <div
-            ref={cardRef}
-            className="lg:col-span-8 h-auto lg:h-[65vh] bg-[#FFFFFF] 
-            border-t border-x lg:border-l lg:border-y border-[#0F172A]/5 
-            rounded-t-[40px] lg:rounded-t-none lg:rounded-tl-[80px] lg:rounded-bl-[80px] 
-            shadow-2xl overflow-hidden relative"
-          >
+    <div className="h-screen pb-10 bg-gradient-to-t from-[#F8FAFC] to-[#E0F2FE] flex items-center justify-center px-6">
+      <div className="w-full max-w-6xl overflow-hidden">
+        <div className="flex flex-col items-center text-center mb-12">
+          <span className="text-[10px] font-sans tracking-[0.5em] text-[#0F172A]/40 uppercase mb-2 font-bold">Professionals</span>
+          <h2 className="font-serif text-5xl md:text-6xl text-[#0F172A] tracking-tight">
+            Our <span className="italic opacity-70 text-[#1E40AF]">Doctors</span>
+          </h2>
+        </div>
+        <div ref={sliderRef} className="flex w-full">
+          {data.map((item, i) => (
             <div
-              ref={fadeRef}
-              className="h-full flex flex-col lg:flex-row"
+              key={i}
+              className="min-w-full grid md:grid-cols-2 gap-10 items-center"
             >
-              <div className="w-full lg:w-[42%] h-[420px] sm:h-[520px] lg:h-full relative overflow-hidden bg-[#F8FAFC]">
-                <img
-                  key={activeDoctor.image}
-                  src={activeDoctor.image}
-                  alt={activeDoctor.name}
-                  className="w-full h-full object-cover object-[50%_20%] brightness-90"
-                />
-                {/* <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-[#FFFFFF] via-transparent to-transparent" /> */}
+              <div className="flex justify-center">
+                <div className="w-80 h-96 overflow-hidden rounded-2xl shadow-3xl border border-[#0F172A]/5">
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="w-full h-full object-cover opacity-90"
+                  />
+                </div>
               </div>
 
-              <div className="w-full lg:w-[58%] flex items-center">
-                <div className="w-full px-6 md:px-10 lg:px-12 py-8 lg:py-10">
-                  <span className="text-[#0EA5A4] text-[9px] uppercase tracking-[0.35em] mb-2 block font-bold">
-                    {activeDoctor.role}
+              <div>
+                <h2 className="text-3xl font-serif text-[#1E40AF]">
+                  {item.name}
+                </h2>
+
+                <p className="text-[#0EA5A4] font-medium tracking-wide">
+                  {item.role}
+                </p>
+
+                <p className="text-[#0F172A]/60">
+                  {item.degrees}
+                </p>
+
+                <p className="mt-2 text-[#0F172A]/80 font-medium">
+                  {item.specialty}
+                </p>
+
+                <p className="text-[#0F172A]/60">
+                  {item.experience}
+                </p>
+
+                <div className="relative mt-6">
+                  <span className="text-[#38BDF8] text-6xl absolute -left-6 -top-6">
+                    “
                   </span>
-
-                  <h4 className="text-[#1E40AF] text-2xl md:text-3xl lg:text-4xl font-serif italic mb-5 leading-snug">
-                    {activeDoctor.name}
-                  </h4>
-
-                  <div className="space-y-5 max-w-md">
-                    <div>
-                      <h5 className="text-[#1E40AF]/40 text-[8px] uppercase tracking-[0.25em] mb-1 font-bold">
-                        Primary Specialty
-                      </h5>
-                      <p className="text-[#0F172A] text-xs font-light leading-relaxed uppercase tracking-wide">
-                        {activeDoctor.specialty}
-                      </p>
-                    </div>
-
-                    <div>
-                      <h5 className="text-[#1E40AF]/40 text-[8px] uppercase tracking-[0.25em] mb-1 font-bold">
-                        Biography
-                      </h5>
-                      <p className="text-[#0F172A]/70 text-xs leading-relaxed italic">
-                        {activeDoctor.bio}
-                      </p>
-                    </div>
-
-                    <div className="pt-4 border-t border-[#0F172A]/5">
-                      <h5 className="text-[#1E40AF]/40 text-[8px] uppercase tracking-[0.25em] mb-1 font-bold">
-                        Experience
-                      </h5>
-                      <p className="text-[#1E40AF] text-xl md:text-2xl font-serif italic">
-                        {activeDoctor.experience}
-                      </p>
-                    </div>
-                  </div>
+                  <p className="text-lg text-[#0F172A] leading-relaxed">
+                    {item.bio}
+                  </p>
                 </div>
               </div>
             </div>
-          </div>
+          ))}
         </div>
-      </Gutters>
-    </section>
-  );
-};
 
-export default Doctors;
+        <div className="flex justify-center gap-6 mt-6">
+          <button
+            onClick={prev}
+            className="w-12 h-12 border border-[#1E40AF]/40 rounded-full flex items-center justify-center text-[#1E40AF] hover:bg-[#1E40AF] hover:text-[#F8FAFC] transition-all duration-300"
+          >
+            ‹
+          </button>
+          <button
+            onClick={next}
+            className="w-12 h-12 border border-[#1E40AF]/40 rounded-full flex items-center justify-center text-[#1E40AF] hover:bg-[#1E40AF] hover:text-[#F8FAFC] transition-all duration-300"
+          >
+            ›
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
