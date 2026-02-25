@@ -36,7 +36,7 @@ const Home = () => {
   },
 ];
   return (
-    <div className='font-sans font-normal text-[14px] leading-[20px] tracking-normal'>
+    <div className='font-sans font-normal text-[14px] leading-[20px] tracking-normal overflow-x-hidden'>
       <Hero />
       <Stats />
       <Services />

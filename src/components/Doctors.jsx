@@ -12,23 +12,25 @@ export default function TestimonialSlider({ data = [] }) {
     if (!data.length) return;
 
     const ctx = gsap.context(() => {
-      const totalWidth = sliderRef.current.scrollWidth;
-      const viewportWidth = window.innerWidth;
+      const getTotalWidth = () => sliderRef.current.scrollWidth;
+      const getViewportWidth = () => window.innerWidth;
 
       gsap.to(sliderRef.current, {
-        x: () => -(totalWidth - viewportWidth),
+        x: () => -(getTotalWidth() - getViewportWidth()),
         ease: "none",
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top+=100 top",
-          end: () => `+=${totalWidth * 0.2}`,
+          start: "top top",
+          end: () => `+=${getTotalWidth() * 0.3}`,
           scrub: 1.5,
           pin: true,
           anticipatePin: 1,
+          invalidateOnRefresh: true,
           // markers: true,
         },
       });
-       gsap.fromTo(
+
+      gsap.fromTo(
         sliderRef.current.children,
         { opacity: 0.85, scale: 0.98 },
         {
@@ -53,25 +55,28 @@ export default function TestimonialSlider({ data = [] }) {
   return (
     <section
       ref={sectionRef}
-      className="relative h-screen bg-gradient-to-t from-[#F8FAFC] to-[#E0F2FE] overflow-hidden"
+      className="relative min-h-screen bg-gradient-to-t from-[#F8FAFC] to-[#E0F2FE] overflow-hidden"
     >
-      <div className="flex flex-col items-center text-center pt-16 mb-12">
-        <span className="text-[10px] font-sans tracking-[0.5em] text-[#0F172A]/40 uppercase mb-2 font-bold">
+      <div className="flex flex-col items-center text-center pt-12 sm:pt-16 mb-8 sm:mb-12 px-4">
+        <span className="text-[9px] sm:text-[10px] font-sans tracking-[0.4em] sm:tracking-[0.5em] text-[#0F172A]/40 uppercase mb-2 font-bold">
           Professionals
         </span>
-        <h2 className="font-serif text-5xl md:text-6xl text-[#0F172A] tracking-tight">
+        <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#0F172A] tracking-tight">
           Our <span className="italic opacity-70 text-[#1E40AF]">Doctors</span>
         </h2>
       </div>
 
-      <div ref={sliderRef} className="flex h-[70vh] items-center">
+      <div
+        ref={sliderRef}
+        className="flex h-auto md:h-[70vh] items-center"
+      >
         {data.map((item, i) => (
           <div
             key={i}
-            className="min-w-screen px-20 grid md:grid-cols-2 gap-10 items-center"
+            className="min-w-full px-4 sm:px-8 md:px-16 lg:px-20 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-center"
           >
             <div className="flex justify-center">
-              <div className="w-80 h-96 overflow-hidden rounded-2xl shadow-3xl border border-[#0F172A]/5">
+              <div className="w-64 sm:w-72 md:w-80 h-80 sm:h-88 md:h-96 overflow-hidden rounded-2xl shadow-2xl border border-[#0F172A]/5">
                 <img
                   src={item.image}
                   alt={item.name}
@@ -80,32 +85,32 @@ export default function TestimonialSlider({ data = [] }) {
               </div>
             </div>
 
-            <div>
-              <h2 className="text-3xl font-serif text-[#1E40AF]">
+            <div className="text-center md:text-left">
+              <h2 className="text-2xl sm:text-3xl font-serif text-[#1E40AF]">
                 {item.name}
               </h2>
 
-              <p className="text-[#0EA5A4] font-medium tracking-wide">
+              <p className="text-sm sm:text-base text-[#0EA5A4] font-medium tracking-wide">
                 {item.role}
               </p>
 
-              <p className="text-[#0F172A]/60">
+              <p className="text-sm sm:text-base text-[#0F172A]/60">
                 {item.degrees}
               </p>
 
-              <p className="mt-2 text-[#0F172A]/80 font-medium">
+              <p className="mt-2 text-sm sm:text-base text-[#0F172A]/80 font-medium">
                 {item.specialty}
               </p>
 
-              <p className="text-[#0F172A]/60">
+              <p className="text-sm sm:text-base text-[#0F172A]/60">
                 {item.experience}
               </p>
 
-              <div className="relative mt-6">
-                <span className="text-[#38BDF8] text-6xl absolute -left-6 -top-6">
+              <div className="relative mt-6 px-2 sm:px-0">
+                <span className="text-[#38BDF8] text-4xl sm:text-5xl md:text-6xl absolute -left-2 sm:-left-4 md:-left-6 -top-4 md:-top-6">
                   “
                 </span>
-                <p className="text-lg text-[#0F172A] leading-relaxed">
+                <p className="text-base sm:text-lg text-[#0F172A] leading-relaxed">
                   {item.bio}
                 </p>
               </div>
