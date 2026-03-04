@@ -84,9 +84,9 @@ const Hero = () => {
                 compassion
               </h1>
 
-              <p className="hero-sub mt-6 max-w-sm text-[14px] sm:text-base text-[#0F172A]/70 leading-relaxed font-sans">
-                It is to fill this need for holistic neurological services that
-                Lakshmi Hospital and Research Centre was started in 1999, by two
+              <p className="hero-sub mt-6 max-w-sm text-[12px] sm:text-md text-[#0F172A]/70 leading-relaxed font-sans">
+                It is to fill this need for holistic neurological services that<br/>
+                <span className="text-[#1E40AF] text-lg">Lakshmi Hospital and Research Centre</span><br/> was started in 1999, by two
                 committed healthcare professional with specialised training in
                 neuro care.
               </p>
