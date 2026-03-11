@@ -16,6 +16,7 @@ const NavBar = () => {
     { name: "Home", to: "/#home" },
     { name: "Services", to: "/#services" },
     { name: "Doctors", to: "/#doctors" },
+    { name: "About", to: "/about" },
   ];
 
   return (

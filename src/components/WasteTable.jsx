@@ -6,7 +6,6 @@ const WasteTable = ({ data, loading }) => {
 
   useEffect(() => {
     if (loading && skeletonRef.current) {
-      // GSAP shimmer animation
       gsap.fromTo(
         skeletonRef.current.querySelectorAll(".skeleton-cell"),
         { backgroundPosition: "-200px 0" },
@@ -21,15 +20,15 @@ const WasteTable = ({ data, loading }) => {
   }, [loading]);
 
   if (loading) {
-    const rows = Array(5).fill(0); // 5 rows placeholder
+    const rows = Array(5).fill(0);
     return (
       <div className="mt-4 flex justify-center">
         <div
           ref={skeletonRef}
-          className="w-full max-w-4xl overflow-x-auto border border-white/10 rounded-lg"
+          className="w-full max-w-4xl overflow-x-auto border border-[#0F172A]/10 rounded-lg bg-white/60 backdrop-blur"
         >
-          <table className="w-full text-sm table-auto">
-            <thead className="bg-white/5">
+          <table className="w-full text-sm table-auto text-[#0F172A]">
+            <thead className="bg-[#F8FAFC]">
               <tr>
                 {["Date", "Red", "Yellow", "Blue", "White", "Total"].map((h, i) => (
                   <th key={i} className="p-3">{h}</th>
@@ -38,20 +37,20 @@ const WasteTable = ({ data, loading }) => {
             </thead>
             <tbody>
               {rows.map((_, i) => (
-                <tr key={i} className="border-b border-white/5">
+                <tr key={i} className="border-b border-[#0F172A]/10">
                   {Array(6).fill(0).map((__, j) => (
                     <td key={j} className="p-3">
-                      <div className="skeleton-cell h-5 rounded bg-gradient-to-r from-white/5 via-white/20 to-white/5 bg-[length:200%_100%]" />
+                      <div className="skeleton-cell h-5 rounded bg-gradient-to-r from-[#0F172A]/5 via-[#0F172A]/10 to-[#0F172A]/5 bg-[length:200%_100%]" />
                     </td>
                   ))}
                 </tr>
               ))}
             </tbody>
-            <tfoot className="bg-white/5 font-semibold">
+            <tfoot className="bg-[#F8FAFC] font-semibold">
               <tr>
                 {Array(6).fill(0).map((_, i) => (
                   <td key={i} className="p-3">
-                    <div className="skeleton-cell h-5 rounded bg-gradient-to-r from-white/5 via-white/20 to-white/5 bg-[length:200%_100%]" />
+                    <div className="skeleton-cell h-5 rounded bg-gradient-to-r from-[#0F172A]/5 via-[#0F172A]/10 to-[#0F172A]/5 bg-[length:200%_100%]" />
                   </td>
                 ))}
               </tr>
@@ -62,7 +61,6 @@ const WasteTable = ({ data, loading }) => {
     );
   }
 
-  // Real table
   const totals = data.reduce(
     (a, c) => ({
       red: a.red + c.red,
@@ -77,9 +75,9 @@ const WasteTable = ({ data, loading }) => {
 
   return (
     <div className="mt-4 flex justify-center fade-in">
-      <div className="w-full max-w-4xl overflow-x-auto border border-white/10 rounded-lg">
-        <table className="w-full text-sm table-auto">
-          <thead className="bg-white/5">
+      <div className="w-full max-w-4xl overflow-x-auto border border-[#0F172A]/10 rounded-lg bg-white/60 backdrop-blur">
+        <table className="w-full text-sm table-auto text-[#0F172A]">
+          <thead className="bg-[#F8FAFC]">
             <tr>
               <th className="p-3">Date</th>
               <th className="p-3">Red</th>
@@ -91,26 +89,26 @@ const WasteTable = ({ data, loading }) => {
           </thead>
           <tbody>
             {data.map((r, i) => (
-              <tr key={i} className="border-b border-white/5">
+              <tr key={i} className="border-b border-[#0F172A]/10">
                 <td className="p-3">{r.date}</td>
                 <td className="p-3">{r.red}</td>
                 <td className="p-3">{r.yellow}</td>
                 <td className="p-3">{r.blue}</td>
                 <td className="p-3">{r.white}</td>
-                <td className="p-3 font-semibold">
+                <td className="p-3 font-semibold text-[#1E40AF]">
                   {r.red + r.yellow + r.blue + r.white}
                 </td>
               </tr>
             ))}
           </tbody>
-          <tfoot className="bg-white/5 font-semibold">
+          <tfoot className="bg-[#F8FAFC] font-semibold">
             <tr>
               <td className="p-3">Total</td>
               <td className="p-3">{totals.red}</td>
               <td className="p-3">{totals.yellow}</td>
               <td className="p-3">{totals.blue}</td>
               <td className="p-3">{totals.white}</td>
-              <td className="p-3">{grandTotal}</td>
+              <td className="p-3 text-[#1E40AF]">{grandTotal}</td>
             </tr>
           </tfoot>
         </table>
