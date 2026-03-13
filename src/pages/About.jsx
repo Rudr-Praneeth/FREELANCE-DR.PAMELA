@@ -34,11 +34,11 @@ const AboutBento = () => {
             <div className="absolute top-6 right-6 w-16 h-16 border border-[#1E40AF]/10 rounded-full flex items-center justify-center group-hover:rotate-45 group-hover:border-[#1E40AF]/30 transition-all duration-700 ease-out">
                <span className="text-[#1E40AF] text-[10px] font-bold tracking-tighter">EST. 99</span>
             </div>
-            <div className="relative z-10 transition-transform duration-500 ease-out group-hover:-translate-y-2">
-              <h3 className="text-2xl font-serif text-[#0F172A] mb-6 max-w-md">
+            <div className="relative z-10 transition-transform duration-500 ease-out group-hover:-translate-y-2 pb-16">
+              <h3 className="text-4xl font-serif text-[#0F172A] mb-6 max-w-md">
                 Bridging the gap between acute injury and independent living.
               </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-[#0F172A]/70 text-sm leading-relaxed">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-[#0F172A]/70 text-md leading-relaxed">
                 <p>
                   Founded by two visionary neuro-specialists, we provide the environment needed to relearn essential life skills.
                 </p>
@@ -49,7 +49,7 @@ const AboutBento = () => {
             </div>
           </div>
 
-          <div className="col-span-1 md:col-span-6 row-span-1 bg-[#1E40AF] p-6 flex flex-col justify-between group hover:bg-[#1e3a8a] transition-colors duration-500">
+          <div className="max-[760px]:hidden col-span-1 md:col-span-6 row-span-1 bg-[#1E40AF] p-6 flex flex-col justify-between group hover:bg-[#1e3a8a] transition-colors duration-500">
             <div className="flex justify-between items-start">
               <span className="text-[10px] tracking-widest text-white/50 uppercase font-bold group-hover:text-white/80 transition-colors duration-300">Mission</span>
               <div className="w-2 h-2 rounded-full bg-[#38BDF8] group-hover:scale-150 transition-transform duration-500" />
@@ -71,7 +71,7 @@ const AboutBento = () => {
             </div>
           </div>
 
-          <div className="col-span-1 md:col-span-3 row-span-1 bg-[#E0F2FE] p-6 flex flex-col justify-between group hover:bg-[#bae6fd] transition-colors duration-500">
+          <div className="col-span-1 md:col-span-3 row-span-1 bg-[#E0F2FE] p-6 flex flex-col justify-between group hover:bg-[#bae6fd] transition-colors duration-500 max-[760px]:hidden">
              <span className="text-[10px] tracking-widest text-[#1E40AF] uppercase font-bold group-hover:tracking-[0.25em] transition-all duration-500">Vision</span>
              <p className="text-[#0F172A] text-xl font-serif leading-tight">
                Global standards in <span className="text-[#1E40AF]">neuro health</span>
@@ -87,8 +87,8 @@ const AboutBento = () => {
             <div className="absolute inset-0 bg-[#0F172A]/0 group-hover:bg-[#0F172A]/20 transition-colors duration-500" />
           </div>
 
-          <div className="col-span-1 md:col-span-6 row-span-1 bg-[#0F172A] p-8 flex flex-col justify-center">
-             <div className="grid grid-cols-2 gap-y-6 gap-x-4">
+          <div className="max-[760px]:hidden col-span-1 md:col-span-6 row-span-1 bg-[#0F172A] p-8 flex flex-col justify-center">
+             <div className="grid grid-cols-2 gap-y-6 gap-x-4 pl-12">
                {["Empathy", "Transparency", "Excellence", "Affordability"].map((usp, i) => (
                  <div key={i} className="flex items-center gap-4 group cursor-pointer">
                    <div className="w-4 h-px bg-[#38BDF8] group-hover:w-10 group-hover:bg-white transition-all duration-300 ease-out" />
@@ -116,7 +116,7 @@ const AboutBento = () => {
              <div className="absolute inset-0 bg-[#0F172A]/0 group-hover:bg-[#0F172A]/20 transition-colors duration-500" />
           </div>
 
-          <div className="col-span-1 md:col-span-12 row-span-1 relative rounded-xl overflow-hidden group">
+          {/* <div className="col-span-1 md:col-span-12 row-span-1 relative rounded-xl overflow-hidden group">
             <img
               src="/5.JPG"
               alt="Innovation"
@@ -128,7 +128,7 @@ const AboutBento = () => {
                  Research Driven Excellence
                </h4>
             </div>
-          </div>
+          </div> */}
 
         </div>
       </Gutters>
