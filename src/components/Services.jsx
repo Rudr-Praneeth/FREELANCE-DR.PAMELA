@@ -1,10 +1,10 @@
-import React, { useRef, useState, useEffect } from "react"
-import { gsap } from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { useGSAP } from "@gsap/react"
-import Gutters from "../layouts/Gutters"
+import React, { useRef, useState, useEffect } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+import Gutters from "../layouts/Gutters";
 
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(ScrollTrigger);
 
 const servicesList = [
   {
@@ -17,8 +17,8 @@ const servicesList = [
       "Normal delivery & postnatal support",
       "Fibroid & ovarian cyst treatment",
       "Hormonal & menstrual management",
-      "Family planning & contraception"
-    ]
+      "Family planning & contraception",
+    ],
   },
   {
     title: "Laparoscopic Surgery",
@@ -29,8 +29,8 @@ const servicesList = [
       "Laparoscopic hysterectomy",
       "Ovarian cyst removal",
       "Endometriosis surgery",
-      "Diagnostic laparoscopy"
-    ]
+      "Diagnostic laparoscopy",
+    ],
   },
   {
     title: "Orthopedic & Arthroscopic",
@@ -41,8 +41,8 @@ const servicesList = [
       "Knee replacement",
       "Shoulder arthroscopy",
       "Fracture management",
-      "Sports rehabilitation"
-    ]
+      "Sports rehabilitation",
+    ],
   },
   {
     title: "Paediatrics",
@@ -53,8 +53,8 @@ const servicesList = [
       "Vaccinations",
       "Growth monitoring",
       "Neonatal care",
-      "Nutrition guidance"
-    ]
+      "Nutrition guidance",
+    ],
   },
   {
     title: "Bleeding Disorders",
@@ -65,8 +65,8 @@ const servicesList = [
       "Hemophilia management",
       "Clotting factor therapy",
       "Platelet disorder treatment",
-      "Genetic counselling"
-    ]
+      "Genetic counselling",
+    ],
   },
   {
     title: "General Medicine",
@@ -77,49 +77,53 @@ const servicesList = [
       "Diabetes management",
       "Hypertension care",
       "Thyroid disorders",
-      "Preventive health checkups"
-    ]
-  }
-]
+      "Preventive health checkups",
+    ],
+  },
+];
 
 const Services = () => {
-  const containerRef = useRef(null)
-  const modalRef = useRef(null)
-  const modalContentRef = useRef(null)
-  const labelLineRef = useRef(null)
-  const [selected, setSelected] = useState(null)
+  const containerRef = useRef(null);
+  const modalRef = useRef(null);
+  const modalContentRef = useRef(null);
+  const labelLineRef = useRef(null);
+  const [selected, setSelected] = useState(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.fromTo(
-        labelLineRef.current,
-        { width: 0 },
-        {
-          width: "100%",
-          duration: 1.2,
-          ease: "expo.out",
-          scrollTrigger: {
-            trigger: labelLineRef.current,
-            start: "top 85%"
-          }
-        }
-      )
+      if (labelLineRef.current) {
+        gsap.fromTo(
+          labelLineRef.current,
+          { width: 0 },
+          {
+            width: "100%",
+            duration: 1.2,
+            ease: "expo.out",
+            scrollTrigger: {
+              trigger: labelLineRef.current,
+              start: "top 85%",
+            },
+          },
+        );
+      }
 
-      const cards = gsap.utils.toArray(".service-card")
+      const cards = gsap.utils.toArray(".service-card");
 
       cards.forEach((card, index) => {
-        const line = card.querySelector(".scan-line")
-        const glow = card.querySelector(".line-glow")
-        const heading = card.querySelector(".card-heading")
-        const desc = card.querySelector(".card-desc")
+        const line = card.querySelector(".scan-line");
+        const glow = card.querySelector(".line-glow");
+        const heading = card.querySelector(".card-heading");
+        const desc = card.querySelector(".card-desc");
+
+        if (!line || !glow || !heading || !desc) return;
 
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: card,
             start: "top 88%",
-            toggleActions: "play none none none"
-          }
-        })
+            toggleActions: "play none none none",
+          },
+        });
 
         tl.fromTo(
           [line, glow],
@@ -129,8 +133,8 @@ const Services = () => {
             opacity: 1,
             duration: 0.8,
             ease: "power3.out",
-            delay: index * 0.08
-          }
+            delay: index * 0.08,
+          },
         )
           .fromTo(
             heading,
@@ -138,72 +142,74 @@ const Services = () => {
             {
               clipPath: "inset(0 0 0 0%)",
               duration: 0.8,
-              ease: "power3.out"
+              ease: "power3.out",
             },
-            "<"
+            "<",
           )
           .fromTo(
             desc,
             { opacity: 0, y: 10 },
             { opacity: 1, y: 0, duration: 0.5 },
-            "-=0.4"
-          )
-      })
-    }, containerRef)
-    return () => ctx.revert()
-  }, [])
+            "-=0.4",
+          );
+      });
+    }, containerRef);
+    return () => ctx.revert();
+  }, []);
 
   useGSAP(
     () => {
-      if (!selected) return
-      document.body.style.overflow = "hidden"
+      if (!selected) return;
+      document.body.style.overflow = "hidden";
 
-      const tl = gsap.timeline()
+      const tl = gsap.timeline();
 
       tl.fromTo(
         modalRef.current,
         { autoAlpha: 0 },
-        { autoAlpha: 1, duration: 0.4 }
-      ).fromTo(
-        modalContentRef.current,
-        { y: 80, scale: 0.96, autoAlpha: 0 },
-        {
-          y: 0,
-          scale: 1,
-          autoAlpha: 1,
-          duration: 0.8,
-          ease: "power4.out"
-        },
-        "-=0.1"
-      ).from(
-        modalContentRef.current.querySelectorAll(".stagger"),
-        {
-          y: 30,
-          autoAlpha: 0,
-          duration: 0.6,
-          stagger: 0.08
-        },
-        "-=0.5"
+        { autoAlpha: 1, duration: 0.4 },
       )
+        .fromTo(
+          modalContentRef.current,
+          { y: 80, scale: 0.96, autoAlpha: 0 },
+          {
+            y: 0,
+            scale: 1,
+            autoAlpha: 1,
+            duration: 0.8,
+            ease: "power4.out",
+          },
+          "-=0.1",
+        )
+        .from(
+          modalContentRef.current.querySelectorAll(".stagger"),
+          {
+            y: 30,
+            autoAlpha: 0,
+            duration: 0.6,
+            stagger: 0.08,
+          },
+          "-=0.5",
+        );
     },
-    { dependencies: [selected], scope: containerRef }
-  )
+    { dependencies: [selected], scope: containerRef },
+  );
 
   const closeModal = () => {
     const tl = gsap.timeline({
       onComplete: () => {
-        document.body.style.overflow = "auto"
-        setSelected(null)
-      }
-    })
+        document.body.style.overflow = "auto";
+        setSelected(null);
+      },
+    });
 
     tl.to(modalContentRef.current, {
       y: 40,
       scale: 0.98,
       autoAlpha: 0,
-      duration: 0.4
-    }).to(modalRef.current, { autoAlpha: 0, duration: 0.3 }, "-=0.2")
-  }
+      duration: 0.4,
+    }).to(modalRef.current, { autoAlpha: 0, duration: 0.3 }, "-=0.2");
+  };
 
   return (
     <section
@@ -219,7 +225,8 @@ const Services = () => {
             </p>
           </div>
           <h2 className="text-4xl md:text-5xl font-serif text-[#0F172A] leading-tight">
-            Departments & <span className="italic text-[#1E40AF]">Services</span>
+            Departments &{" "}
+            <span className="italic text-[#1E40AF]">Services</span>
           </h2>
         </div>
 
@@ -306,7 +313,7 @@ const Services = () => {
         </div>
       )}
     </section>
-  )
-}
+  );
+};
 
-export default Services
+export default Services;

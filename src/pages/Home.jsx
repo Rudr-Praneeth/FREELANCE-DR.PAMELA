@@ -1,12 +1,46 @@
-import React from "react";
+import React, {useEffect, useLayoutEffect} from "react";
 import Hero from "../components/Hero";
 import Stats from "../components/Stats";
 import Services from "../components/Services";
 import Doctors from "../components/Doctors";
 import Contact from "../components/Contact";
+import ScrollToTop from "../utils/ScrollToTop"
 
 const Home = () => {
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+    
+    if ('scrollRestoration' in window.history) {
+        window.history.scrollRestoration = 'manual';
+    }
+
+    const timer = setTimeout(() => {
+        ScrollTrigger.refresh();
+    }, 500);
+
+    return () => {
+        if ('scrollRestoration' in window.history) {
+            window.history.scrollRestoration = 'auto';
+        }
+    };
+}, []);
   const doctorData = [
+    {
+    name: "Dr. D. Pushpalatha",
+    role: "obstetrician & gynaecologist",
+    degrees: "MD",
+    specialty: "Women’s Health & Maternity",
+    experience: "Senior Consultant",
+    bio: "Specialist in comprehensive maternity care and women's health wellness.",
+    image: "Pushpalatha.jpeg",
+    details: (
+      <ul className="list-disc pl-5 space-y-2 text-[#0F172A]/80">
+        <li>Senior Consultant specializing in comprehensive maternity care.</li>
+        <li>Focus on women’s health wellness and preventative care.</li>
+        <li>Expertise in managing routine and high-risk obstetric cases.</li>
+      </ul>
+    ),
+  },
   {
     name: "Dr. Sriram Chandra Damaraju",
     role: "Consultant & Neurosurgeon",
@@ -42,25 +76,10 @@ const Home = () => {
       </ul>
     ),
   },
-  {
-    name: "Dr. D. Pushpalatha",
-    role: "obstetrician & gynaecologist",
-    degrees: "MD",
-    specialty: "Women’s Health & Maternity",
-    experience: "Senior Consultant",
-    bio: "Specialist in comprehensive maternity care and women's health wellness.",
-    image: "Pushpalatha.jpeg",
-    details: (
-      <ul className="list-disc pl-5 space-y-2 text-[#0F172A]/80">
-        <li>Senior Consultant specializing in comprehensive maternity care.</li>
-        <li>Focus on women’s health wellness and preventative care.</li>
-        <li>Expertise in managing routine and high-risk obstetric cases.</li>
-      </ul>
-    ),
-  },
 ];
   return (
     <div className="font-sans font-normal text-[14px] leading-[20px] tracking-normal overflow-x-hidden">
+      <ScrollToTop />
       <Hero />
       <Stats />
       <Services />

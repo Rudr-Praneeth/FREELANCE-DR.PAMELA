@@ -5,6 +5,24 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const doctorData = [
+    {
+    name: "Dr. D. Pushpalatha",
+    role: "Obstetrician & Gynaecologist",
+    degrees: "M.D.",
+    specialty: "Women's Health & Maternity Care",
+    experience: "Senior Consultant",
+    bio: "Specialist in comprehensive maternity care and women's health, guiding patients through every stage with expertise and warmth.",
+    image: "Pushpalatha.jpeg",
+    color: "#9D174D",
+    accent: "#FCE7F3",
+    tag: "Women's Health",
+    credentials: [
+      "M.D. in Obstetrics & Gynaecology",
+      "Senior Consultant, Lakshmi Hospital",
+    ],
+    narrative: `Dr. D. Pushpalatha is a Senior Consultant specialising in Obstetrics and Gynaecology, bringing years of dedicated practice in women's health and maternity care.`,
+    extended: `Her expertise spans both routine and high-risk obstetric cases, and she approaches each patient with a commitment to preventative care and long-term wellness. Dr. Pushpalatha believes that women's health is not a speciality in isolation  it is foundational to the health of families and communities.\n\nAt Lakshmi Hospital, she provides a space where women feel heard, respected, and supported through every phase of their health journey.`,
+  },
   {
     name: "Dr. Sriram Chandra Damaraju",
     role: "Consultant Neurosurgeon",
@@ -42,24 +60,6 @@ const doctorData = [
     ],
     narrative: `Pamela Narayan holds a Bachelor in Physiotherapy from Christian Medical College, Vellore  one of India's foremost medical institutions. She went on to complete her M.Sc. in Neurophysiotherapy from the University of East London in 1997, bringing international rigour to her practice.`,
     extended: `Most recently, she completed a Certificate Course in Neurological Rehabilitation awarded by the University of Newcastle, UK  a testament to her commitment to staying at the forefront of her field.\n\nBeyond neurological disorders, Pamela brings specialised experience in obstetric physiotherapy, supporting women through the physical demands of pregnancy and recovery.\n\nShe is a proud member of the Physiotherapy Committee of the World Federation of Haemophilia, where she remains an active and valued contributor  bridging the worlds of physiotherapy and haematological care with both expertise and dedication.`,
-  },
-  {
-    name: "Dr. D. Pushpalatha",
-    role: "Obstetrician & Gynaecologist",
-    degrees: "M.D.",
-    specialty: "Women's Health & Maternity Care",
-    experience: "Senior Consultant",
-    bio: "Specialist in comprehensive maternity care and women's health, guiding patients through every stage with expertise and warmth.",
-    image: "Pushpalatha.jpeg",
-    color: "#9D174D",
-    accent: "#FCE7F3",
-    tag: "Women's Health",
-    credentials: [
-      "M.D. in Obstetrics & Gynaecology",
-      "Senior Consultant, Lakshmi Hospital",
-    ],
-    narrative: `Dr. D. Pushpalatha is a Senior Consultant specialising in Obstetrics and Gynaecology, bringing years of dedicated practice in women's health and maternity care.`,
-    extended: `Her expertise spans both routine and high-risk obstetric cases, and she approaches each patient with a commitment to preventative care and long-term wellness. Dr. Pushpalatha believes that women's health is not a speciality in isolation  it is foundational to the health of families and communities.\n\nAt Lakshmi Hospital, she provides a space where women feel heard, respected, and supported through every phase of their health journey.`,
   },
 ];
 
