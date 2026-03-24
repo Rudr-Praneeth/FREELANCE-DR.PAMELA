@@ -5,7 +5,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const doctorData = [
-    {
+  {
     name: "Dr. D. Pushpalatha",
     role: "Obstetrician & Gynaecologist",
     degrees: "M.D.",
@@ -43,7 +43,7 @@ const doctorData = [
     extended: `His deep interest in neuro-rehabilitation is not incidental  it is a natural extension of his belief that surgical excellence must be followed through with thoughtful recovery. Surgery restores possibility; rehabilitation restores life.\n\nAs co-founder of Lakshmi Hospital and Research Centre, Dr. Damaraju has built a specialised healthcare environment committed to providing holistic neurological services at affordable cost  ensuring that a smooth and dignified process to wellness is available to every patient who walks through their doors.`,
   },
   {
-    name: "Pamela Narayan",
+    name: "Dr. Pamela Narayan",
     role: "Consultant Physiotherapist",
     degrees: "B.P.T. (Vellore) · M.Sc. (London)",
     specialty: "Neurological Rehabilitation & Obstetric Physiotherapy",
@@ -84,10 +84,11 @@ export default function TestimonialSlider({ data = doctorData }) {
         ease: "none",
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top+=100 top",
-          end: () => `+=${window.innerWidth * (totalSlides)}`,
+          start: "top top",
+          end: () => `+=${window.innerWidth * totalSlides}`,
           scrub: 1,
           pin: true,
+          pinSpacing: true,
           anticipatePin: 1,
           // markers: true,
           invalidateOnRefresh: true,
@@ -113,6 +114,10 @@ export default function TestimonialSlider({ data = doctorData }) {
         );
       });
     }, sectionRef);
+
+    setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 500);
 
     return () => ctx.revert();
   }, [data.length]);
@@ -196,12 +201,11 @@ export default function TestimonialSlider({ data = doctorData }) {
         .modal-scroll::-webkit-scrollbar-track { background: transparent; }
         .modal-scroll::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 999px; }
       `}</style>
-
+      <div id="doctors"></div>
       <section
         ref={sectionRef}
         className="relative overflow-hidden font-body bg-gradient-to-t from-[#F8FAFC] to-[#E0F2FE]"
         style={{ minHeight: "100vh" }}
-        id="doctors"
       >
         <div
           className="flex flex-col items-center text-center px-4"

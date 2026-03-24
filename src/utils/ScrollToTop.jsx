@@ -2,20 +2,25 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 function ScrollToTop() {
-  const { pathname, state } = useLocation();
+  const { pathname, hash } = useLocation();
 
   useEffect(() => {
-    if (state?.scrollTo) {
-      setTimeout(() => {
-        const element = document.getElementById(state.scrollTo);
-        if (element) {
-          element.scrollIntoView({ behavior: "auto" });
-        }
-      }, 100);
+    if (!hash) {
+      window.scrollTo(0, 0);
     } else {
-      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+      const id = hash.replace("#", "");
+      const timeoutId = setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth", block: "start" });
+        } else {
+          window.scrollTo(0, 0);
+        }
+      }, 100); 
+
+      return () => clearTimeout(timeoutId);
     }
-  }, [pathname, state]);
+  }, [pathname, hash]);
 
   return null;
 }
