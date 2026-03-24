@@ -1,26 +1,33 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 function ScrollToTop() {
-  const { pathname, hash } = useLocation();
+  const { pathname, state } = useLocation();
 
   useEffect(() => {
-    if (!hash) {
-      window.scrollTo(0, 0);
-    } else {
-      const id = hash.replace("#", "");
-      const timeoutId = setTimeout(() => {
-        const element = document.getElementById(id);
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth", block: "start" });
-        } else {
-          window.scrollTo(0, 0);
-        }
-      }, 100); 
+    if (state?.scrollTo) {
+      const element = document.getElementById(state.scrollTo);
 
-      return () => clearTimeout(timeoutId);
+      if (element) {
+        gsap.to(window, {
+          scrollTo: { y: element, offsetY: 100 },
+          duration: 1,
+          ease: "power2.out",
+          onComplete: () => ScrollTrigger.refresh(),
+        });
+      }
+    } else {
+      gsap.to(window, {
+        scrollTo: 0,
+        duration: 0.5,
+      });
     }
-  }, [pathname, hash]);
+  }, [pathname, state]);
 
   return null;
 }
