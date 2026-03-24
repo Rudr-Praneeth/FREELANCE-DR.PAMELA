@@ -6,7 +6,7 @@ const AboutBento = () => {
   return (
     <section
       id="about"
-      className="relative py-12 lg:py-20 bg-white overflow-hidden mt-12"
+      className="relative py-12 lg:py-20 bg-white overflow-hidden"
     >
       <Gutters>
         <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-10 gap-8">

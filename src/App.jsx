@@ -3,12 +3,10 @@ import MainLayout from "./layouts/MainLayout";
 import Home from "./pages/Home";
 import WasteManagement from "./pages/WasteManagement";
 import About from "./pages/About"
-import ScrollToTop from "./utils/ScrollToTop";
 
 const App = () => {
   return (
     <BrowserRouter>
-    <ScrollToTop />
       <Routes>
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
