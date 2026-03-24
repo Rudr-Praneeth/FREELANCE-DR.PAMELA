@@ -16,6 +16,7 @@ const NavBar = () => {
     { name: "Home", to: "/#home" },
     { name: "Services", to: "/#services" },
     { name: "Doctors", to: "/#doctors" },
+    { name: "About", to: "/about" },
   ];
 
   return (
@@ -27,8 +28,8 @@ const NavBar = () => {
         className={`absolute inset-0 -z-10 transition-opacity duration-500 
         ${scrolled ? "opacity-100" : "opacity-0"}`}
       >
-        <div className="absolute inset-0 bg-black/60 backdrop-blur-xl" />
-        <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+        <div className="absolute inset-0 bg-[#F8FAFC]/90 backdrop-blur-xl" />
+        <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#1E40AF]/20 to-transparent" />
       </div>
 
       <div className="max-w-[1400px] mx-auto flex items-center justify-between">
@@ -39,10 +40,10 @@ const NavBar = () => {
             className="h-6 md:h-8 w-auto object-contain"
           />
           <div className="flex flex-col">
-            <span className="text-sm md:text-lg font-bold tracking-tighter text-white leading-none">
+            <span className="text-sm md:text-lg font-bold tracking-tighter text-[#1E40AF] leading-none">
               LAKSHMI HOSPITAL
             </span>
-            <span className="text-[10px] md:text-[11px] font-medium tracking-[0.2em] text-[#7E878E] group-hover:text-[#F5F5F6] transition-colors">
+            <span className="text-[10px] md:text-[11px] font-medium tracking-[0.2em] text-[#0F172A]/60 group-hover:text-[#0EA5A4] transition-colors">
               & RESEARCH CENTRE
             </span>
           </div>
@@ -55,19 +56,19 @@ const NavBar = () => {
                 smooth
                 key={link.name}
                 to={link.to}
-                className="group relative text-[13px] font-medium uppercase tracking-widest text-[#7E878E] transition-all duration-300 hover:text-[#F5F5F6]"
+                className="group relative text-[13px] font-medium uppercase tracking-widest text-[#0F172A]/60 transition-all duration-300 hover:text-[#0EA5A4]"
               >
                 {link.name}
-                <span className="absolute -bottom-1 left-0 h-[1px] w-0 bg-[#F5F5F6] transition-all duration-300 group-hover:w-full" />
+                <span className="absolute -bottom-1 left-0 h-[1px] w-0 bg-[#38BDF8] transition-all duration-300 group-hover:w-full" />
               </HashLink>
             ) : (
               <Link
                 key={link.name}
                 to={link.to}
-                className="group relative text-[13px] font-medium uppercase tracking-widest text-[#7E878E] transition-all duration-300 hover:text-[#F5F5F6]"
+                className="group relative text-[13px] font-medium uppercase tracking-widest text-[#0F172A]/60 transition-all duration-300 hover:text-[#0EA5A4]"
               >
                 {link.name}
-                <span className="absolute -bottom-1 left-0 h-[1px] w-0 bg-[#F5F5F6] transition-all duration-300 group-hover:w-full" />
+                <span className="absolute -bottom-1 left-0 h-[1px] w-0 bg-[#38BDF8] transition-all duration-300 group-hover:w-full" />
               </Link>
             )
           )}
@@ -77,7 +78,7 @@ const NavBar = () => {
           <HashLink
             smooth
             to="/#contact"
-            className="group relative h-10 w-32 overflow-hidden rounded-full border border-white/10 bg-transparent text-[11px] uppercase tracking-widest font-bold text-white transition-all duration-500 hover:border-[#F5F5F6] hover:shadow-[0_0_20px_rgba(245,245,246,0.2)] flex items-center justify-center"
+            className="group relative h-10 w-32 overflow-hidden rounded-full border border-[#1E40AF]/20 bg-transparent text-[11px] uppercase tracking-widest font-bold text-[#1E40AF] transition-all duration-500 hover:border-[#0EA5A4] hover:shadow-[0_0_20px_rgba(14,165,164,0.2)] flex items-center justify-center"
           >
             <div className="relative flex items-center justify-center w-full h-full transition-transform duration-300 group-hover:-translate-x-2">
               <span>Contact</span>
@@ -93,19 +94,19 @@ const NavBar = () => {
           className="relative z-50 flex h-10 w-10 flex-col items-center justify-center gap-1.5 lg:hidden"
         >
           <div
-            className={`h-[1px] w-6 bg-white transition-all duration-500 ${isOpen ? "translate-y-[7px] rotate-45" : ""}`}
+            className={`h-[1px] w-6 bg-[#1E40AF] transition-all duration-500 ${isOpen ? "translate-y-[7px] rotate-45" : ""}`}
           />
           <div
-            className={`h-[1px] w-6 bg-white transition-all duration-300 ${isOpen ? "opacity-0" : "opacity-100"}`}
+            className={`h-[1px] w-6 bg-[#1E40AF] transition-all duration-300 ${isOpen ? "opacity-0" : "opacity-100"}`}
           />
           <div
-            className={`h-[1px] w-6 bg-white transition-all duration-500 ${isOpen ? "-translate-y-[7px] -rotate-45" : ""}`}
+            className={`h-[1px] w-6 bg-[#1E40AF] transition-all duration-500 ${isOpen ? "-translate-y-[7px] -rotate-45" : ""}`}
           />
         </button>
       </div>
 
       <div
-        className={`fixed inset-0 z-40 flex flex-col items-center justify-center gap-10 bg-[#0D0D0D] transition-all duration-700 ease-in-out lg:hidden
+        className={`fixed inset-0 z-40 flex flex-col items-center justify-center gap-10 bg-[#F8FAFC] transition-all duration-700 ease-in-out lg:hidden
         ${isOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"}`}
       >
         {links.map((link) =>
@@ -114,7 +115,7 @@ const NavBar = () => {
               smooth
               key={link.name}
               to={link.to}
-              className="text-3xl font-serif italic text-[#7E878E] hover:text-[#F5F5F6] transition-colors"
+              className="text-3xl font-serif italic text-[#0F172A]/60 hover:text-[#0EA5A4] transition-colors"
               onClick={() => setIsOpen(false)}
             >
               {link.name}
@@ -123,7 +124,7 @@ const NavBar = () => {
             <Link
               key={link.name}
               to={link.to}
-              className="text-3xl font-serif italic text-[#7E878E] hover:text-[#F5F5F6] transition-colors"
+              className="text-3xl font-serif italic text-[#0F172A]/60 hover:text-[#0EA5A4] transition-colors"
               onClick={() => setIsOpen(false)}
             >
               {link.name}

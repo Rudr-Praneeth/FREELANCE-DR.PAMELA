@@ -38,6 +38,10 @@ const WasteManagement = () => {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     fetchData();
   }, [year]);
 
@@ -54,27 +58,27 @@ const WasteManagement = () => {
   const months = Object.keys(data);
 
   return (
-    <section className="min-h-screen pt-32 pb-20 bg-gradient-to-b from-[#090A10] to-[#111827]">
+    <section className="min-h-screen pt-32 pb-20 bg-gradient-to-b from-[#F8FAFC] to-[#E0F2FE]">
       <NavBar />
       <Gutters>
         <div className="max-w-6xl mx-auto">
-          <p className="text-[10px] tracking-[0.4em] uppercase text-white/40 font-bold mb-4 fade-in">
+          <p className="text-[10px] tracking-[0.4em] uppercase text-[#0F172A]/50 font-semibold mb-4 fade-in">
             Compliance & Reporting
           </p>
 
-          <h1 className="font-serif text-4xl lg:text-5xl tracking-tight fade-in">
+          <h1 className="font-serif text-4xl lg:text-5xl tracking-tight text-[#0F172A] fade-in">
             Biomedical
-            <span className="italic font-light text-[#7E878E]"> Waste</span>
+            <span className="italic font-light text-[#1E40AF]"> Waste</span>
           </h1>
 
           <div className="mt-8 flex flex-wrap gap-4 fade-in">
             <select
               value={year}
               onChange={e => setYear(Number(e.target.value))}
-              className="bg-transparent border border-white/20 px-4 py-3 text-white"
+              className="bg-white/60 backdrop-blur border border-[#0F172A]/10 px-4 py-3 text-[#0F172A]"
             >
               {[currentYear, currentYear - 1, currentYear - 2].map(y => (
-                <option key={y} value={y} className="bg-black">
+                <option key={y} value={y} className="bg-white text-[#0F172A]">
                   {y}
                 </option>
               ))}
@@ -83,16 +87,16 @@ const WasteManagement = () => {
             <select
               value={month}
               onChange={e => setMonth(e.target.value)}
-              className="bg-transparent border border-white/20 px-4 py-3 text-white"
+              className="bg-white/60 backdrop-blur border border-[#0F172A]/10 px-4 py-3 text-[#0F172A]"
             >
               {months.length > 0 ? (
                 months.map(m => (
-                  <option key={m} value={m} className="bg-black">
+                  <option key={m} value={m} className="bg-white text-[#0F172A]">
                     {m}
                   </option>
                 ))
               ) : (
-                <option value="" disabled className="bg-black">
+                <option value="" disabled className="bg-white text-[#0F172A]">
                   No Data
                 </option>
               )}
@@ -103,7 +107,7 @@ const WasteManagement = () => {
             {loading ? (
               <WasteTable loading />
             ) : months.length === 0 ? (
-              <p className="text-center text-white/50 fade-in">
+              <p className="text-center text-[#0F172A]/50 fade-in">
                 No data available for {year}.
               </p>
             ) : (
@@ -115,7 +119,7 @@ const WasteManagement = () => {
 
       <button
         onClick={() => setShowAdmin(true)}
-        className="fixed bottom-6 right-6 px-4 py-3 rounded-full bg-white/10 backdrop-blur text-white fade-in"
+        className="fixed bottom-6 right-6 px-5 py-3 rounded-full bg-[#1E40AF] text-[#F8FAFC] shadow-lg hover:bg-[#0EA5A4] transition-colors fade-in"
       >
         Admin
       </button>
