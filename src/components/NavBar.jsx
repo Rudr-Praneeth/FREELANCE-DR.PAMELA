@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { HashLink } from "react-router-hash-link";
 import { Link } from "react-router-dom";
 
 const NavBar = () => {
@@ -13,9 +12,9 @@ const NavBar = () => {
   }, []);
 
   const links = [
-    { name: "Home", to: "/#home" },
-    { name: "Services", to: "/#services" },
-    { name: "Doctors", to: "/#doctors" },
+    { name: "Home", to: "/", state: { scrollTo: "home" } },
+    { name: "Services", to: "/", state: { scrollTo: "services" } },
+    { name: "Doctors", to: "/", state: { scrollTo: "doctors" } },
     { name: "About", to: "/about" },
   ];
 
@@ -33,7 +32,11 @@ const NavBar = () => {
       </div>
 
       <div className="max-w-[1400px] mx-auto flex items-center justify-between">
-        <HashLink smooth to="/#home" className="flex items-center gap-2 cursor-pointer group">
+        <Link
+          to="/"
+          state={{ scrollTo: "home" }}
+          className="flex items-center gap-2 cursor-pointer group"
+        >
           <img
             src="/logo.jpeg"
             alt="Lakshmi Hospital Logo"
@@ -47,37 +50,26 @@ const NavBar = () => {
               & RESEARCH CENTRE
             </span>
           </div>
-        </HashLink>
+        </Link>
 
         <div className="hidden items-center gap-8 lg:flex">
-          {links.map((link) =>
-            link.to.includes("#") ? (
-              <HashLink
-                smooth
-                key={link.name}
-                to={link.to}
-                className="group relative text-[13px] font-medium uppercase tracking-widest text-[#0F172A]/60 transition-all duration-300 hover:text-[#0EA5A4]"
-              >
-                {link.name}
-                <span className="absolute -bottom-1 left-0 h-[1px] w-0 bg-[#38BDF8] transition-all duration-300 group-hover:w-full" />
-              </HashLink>
-            ) : (
-              <Link
-                key={link.name}
-                to={link.to}
-                className="group relative text-[13px] font-medium uppercase tracking-widest text-[#0F172A]/60 transition-all duration-300 hover:text-[#0EA5A4]"
-              >
-                {link.name}
-                <span className="absolute -bottom-1 left-0 h-[1px] w-0 bg-[#38BDF8] transition-all duration-300 group-hover:w-full" />
-              </Link>
-            )
-          )}
+          {links.map((link) => (
+            <Link
+              key={link.name}
+              to={link.to}
+              state={link.state}
+              className="group relative text-[13px] font-medium uppercase tracking-widest text-[#0F172A]/60 transition-all duration-300 hover:text-[#0EA5A4]"
+            >
+              {link.name}
+              <span className="absolute -bottom-1 left-0 h-[1px] w-0 bg-[#38BDF8] transition-all duration-300 group-hover:w-full" />
+            </Link>
+          ))}
         </div>
 
         <div className="hidden lg:block">
-          <HashLink
-            smooth
-            to="/#contact"
+          <Link
+            to="/"
+            state={{ scrollTo: "contact" }}
             className="group relative h-10 w-32 overflow-hidden rounded-full border border-[#1E40AF]/20 bg-transparent text-[11px] uppercase tracking-widest font-bold text-[#1E40AF] transition-all duration-500 hover:border-[#0EA5A4] hover:shadow-[0_0_20px_rgba(14,165,164,0.2)] flex items-center justify-center"
           >
             <div className="relative flex items-center justify-center w-full h-full transition-transform duration-300 group-hover:-translate-x-2">
@@ -86,7 +78,7 @@ const NavBar = () => {
                 →
               </span>
             </div>
-          </HashLink>
+          </Link>
         </div>
 
         <button
@@ -109,28 +101,17 @@ const NavBar = () => {
         className={`fixed inset-0 z-40 flex flex-col items-center justify-center gap-10 bg-[#F8FAFC] transition-all duration-700 ease-in-out lg:hidden
         ${isOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"}`}
       >
-        {links.map((link) =>
-          link.to.includes("#") ? (
-            <HashLink
-              smooth
-              key={link.name}
-              to={link.to}
-              className="text-3xl font-serif italic text-[#0F172A]/60 hover:text-[#0EA5A4] transition-colors"
-              onClick={() => setIsOpen(false)}
-            >
-              {link.name}
-            </HashLink>
-          ) : (
-            <Link
-              key={link.name}
-              to={link.to}
-              className="text-3xl font-serif italic text-[#0F172A]/60 hover:text-[#0EA5A4] transition-colors"
-              onClick={() => setIsOpen(false)}
-            >
-              {link.name}
-            </Link>
-          )
-        )}
+        {links.map((link) => (
+          <Link
+            key={link.name}
+            to={link.to}
+            state={link.state}
+            className="text-3xl font-serif italic text-[#0F172A]/60 hover:text-[#0EA5A4] transition-colors"
+            onClick={() => setIsOpen(false)}
+          >
+            {link.name}
+          </Link>
+        ))}
       </div>
     </nav>
   );
