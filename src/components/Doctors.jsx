@@ -140,7 +140,7 @@ export default function TestimonialSlider({ data }) {
 
       <section
         ref={sectionRef}
-        className="relative overflow-hidden font-body bg-gradient-to-t from-[#F8FAFC] to-[#E0F2FE]"
+        className="relative overflow-hidden font-body bg-gradient-to-t from-[#F8FAFC] to-[#E0F2FE] py-8"
         style={{ minHeight: "100vh" }}
         id="doctors"
       >
