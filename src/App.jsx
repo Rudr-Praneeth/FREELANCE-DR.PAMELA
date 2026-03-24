@@ -6,7 +6,7 @@ import About from "./pages/About"
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter> 
       <Routes>
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
