@@ -5,7 +5,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const doctorData = [
-    {
+  {
     name: "Dr. D. Pushpalatha",
     role: "Obstetrician & Gynaecologist",
     degrees: "M.D.",
@@ -43,7 +43,7 @@ const doctorData = [
     extended: `His deep interest in neuro-rehabilitation is not incidental  it is a natural extension of his belief that surgical excellence must be followed through with thoughtful recovery. Surgery restores possibility; rehabilitation restores life.\n\nAs co-founder of Lakshmi Hospital and Research Centre, Dr. Damaraju has built a specialised healthcare environment committed to providing holistic neurological services at affordable cost  ensuring that a smooth and dignified process to wellness is available to every patient who walks through their doors.`,
   },
   {
-    name: "Pamela Narayan",
+    name: "Dr. Pamela Narayan",
     role: "Consultant Physiotherapist",
     degrees: "B.P.T. (Vellore) · M.Sc. (London)",
     specialty: "Neurological Rehabilitation & Obstetric Physiotherapy",
@@ -85,7 +85,7 @@ export default function TestimonialSlider({ data = doctorData }) {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top+=100 top",
-          end: () => `+=${window.innerWidth * (totalSlides)}`,
+          end: () => `+=${window.innerWidth * totalSlides}`,
           scrub: 1,
           pin: true,
           anticipatePin: 1,
@@ -355,7 +355,7 @@ export default function TestimonialSlider({ data = doctorData }) {
       {activeDoctor && (
         <div
           ref={overlayRef}
-          className="fixed inset-0 z-50 flex items-end justify-center"
+          className="fixed inset-0 z-[999] flex items-end md:items-center justify-center"
           style={{
             background: "rgba(2,8,23,0.72)",
             backdropFilter: "blur(6px)",
@@ -364,8 +364,11 @@ export default function TestimonialSlider({ data = doctorData }) {
         >
           <div
             ref={modalRef}
-            className="relative w-full overflow-hidden top-15"
-            style={{ height: "100vh", background: "#FAFAFA" }}
+            className="relative w-full h-full max-h-screen overflow-hidden rounded-t-3xl md:rounded-none"
+            style={{
+              background: "#FAFAFA",
+              marginTop: "env(safe-area-inset-top)",
+            }}
             onClick={(e) => e.stopPropagation()}
           >
             <div
@@ -375,7 +378,7 @@ export default function TestimonialSlider({ data = doctorData }) {
 
             <div
               ref={modalContentRef}
-              className="modal-scroll h-full overflow-y-auto"
+              className="modal-scroll h-full overflow-y-auto pt-20 md:pt-14"
             >
               <div className="max-w-5xl mx-auto px-8 md:px-14 pt-14 pb-24 space-y-10">
                 <div className="modal-reveal flex items-start justify-between">
