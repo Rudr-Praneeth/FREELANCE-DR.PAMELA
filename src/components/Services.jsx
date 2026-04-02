@@ -33,10 +33,10 @@ const servicesList = [
     ],
   },
   {
-    title: "Orthopedic & Arthroscopic",
+    title: "Orthopaedic & Arthroscopic",
     desc: "Restoring strength and mobility.",
     fullDesc:
-      "Comprehensive orthopedic solutions including joint replacement, arthroscopy, trauma management, and rehabilitation programs.",
+      "Comprehensive orthopaedic solutions including joint replacement, arthroscopy, trauma management, and rehabilitation programs.",
     details: [
       "Knee replacement",
       "Shoulder arthroscopy",

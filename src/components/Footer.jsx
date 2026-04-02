@@ -14,7 +14,7 @@ const Footer = () => {
     ],
     patientCare: [
       "Satisfied Patients",
-      "4.7 Google Ratings",
+      "4.8 Google Ratings",
       "Qualified Staff",
       "Award Achieved"
     ]

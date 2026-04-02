@@ -23,7 +23,7 @@ const data = [
   {
     year: "1998",
     title: "A Transformational Expansion",
-    content: `The journey took a transformative turn in 1998 with the arrival of Dr. D. Sriram Chandra and Dr. Pamela Narayan. With expertise in neurosurgery and rehabilitation, they expanded the hospital’s scope into neurological and recovery care. Patients facing complex brain and spine conditions found both advanced treatment and a path to regaining independence through rehabilitation.`,
+    content: `The journey took a transformative turn in 1998 with the arrival of Dr. D. Sriram Chandra and Dr. Pamela Narayan. With expertise in neurosurgery and rehabilitation, they expanded the hospital’s scope into neurological recovery. Patients facing complex brain and spine conditions found both advanced treatment and a path to regaining independence through rehabilitation.`,
   },
   {
     year: "Today",
