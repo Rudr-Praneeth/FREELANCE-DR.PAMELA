@@ -77,7 +77,7 @@ const NavBar = () => {
         <div className="hidden lg:block">
           <HashLink
             smooth
-            to="/#contact"
+            to="/contact"
             className="group relative h-10 w-32 overflow-hidden rounded-full border border-[#1E40AF]/20 bg-transparent text-[11px] uppercase tracking-widest font-bold text-[#1E40AF] transition-all duration-500 hover:border-[#0EA5A4] hover:shadow-[0_0_20px_rgba(14,165,164,0.2)] flex items-center justify-center"
           >
             <div className="relative flex items-center justify-center w-full h-full transition-transform duration-300 group-hover:-translate-x-2">
