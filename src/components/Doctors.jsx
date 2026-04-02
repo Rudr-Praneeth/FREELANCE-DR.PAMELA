@@ -1,62 +1,92 @@
 import { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
 export default function TestimonialSlider({ data }) {
-  const sectionRef = useRef(null);
-  const sliderRef = useRef(null);
+  const trackRef = useRef(null);
   const modalRef = useRef(null);
   const overlayRef = useRef(null);
   const modalContentRef = useRef(null);
+  const autoRef = useRef(null);
+  const animating = useRef(false);
+
+  const startX = useRef(0);
+  const endX = useRef(0);
 
   const [activeDoctor, setActiveDoctor] = useState(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [index, setIndex] = useState(data.length);
+  const [hovering, setHovering] = useState(false);
+  const currentIndex = index % data.length;
+
+  const loopData = [...data, ...data, ...data];
+
+  const slide = (dir) => {
+    clearInterval(autoRef.current);
+    if (animating.current) return;
+    animating.current = true;
+
+    const next = index + dir;
+
+    gsap.to(trackRef.current, {
+  x: `-${next * 100}vw`,
+  duration: 1.1,
+  ease: "expo.inOut",
+  force3D: true,
+  onStart: () => {
+    gsap.set(trackRef.current, { willChange: "transform" });
+  },
+  onComplete: () => {
+    let finalIndex = next;
+
+    if (next >= data.length * 2) {
+      finalIndex = data.length;
+    }
+
+    if (next < data.length) {
+      finalIndex = data.length * 2 - 1;
+    }
+
+    if (finalIndex !== next) {
+      gsap.set(trackRef.current, {
+        x: `-${finalIndex * 100}vw`,
+      });
+    }
+
+    setIndex(finalIndex);
+    animating.current = false;
+
+    gsap.set(trackRef.current, { willChange: "auto" });
+  },
+});
+  };
 
   useEffect(() => {
-    if (!data.length) return;
+    gsap.set(trackRef.current, {
+      x: `-${index * 100}vw`,
+    });
+  }, []);
 
-    const ctx = gsap.context(() => {
-      const totalSlides = data.length;
+  useEffect(() => {
+    if (activeDoctor) return;
+    autoRef.current = setInterval(() => slide(1), 5000);
+    return () => clearInterval(autoRef.current);
+  }, [hovering, index, activeDoctor]);
 
-      gsap.to(sliderRef.current, {
-        x: () => -(sliderRef.current.scrollWidth - window.innerWidth),
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top+=100 top",
-          end: () => `+=${window.innerWidth * totalSlides}`,
-          scrub: 1,
-          pin: true,
-          anticipatePin: 1,
-          // markers: true,
-          invalidateOnRefresh: true,
-          onUpdate: (self) => {
-            const idx = Math.round(self.progress * (totalSlides - 1));
-            setCurrentIndex(idx);
-          },
-        },
-      });
+  const handleTouchStart = (e) => {
+    startX.current = e.touches[0].clientX;
+  };
 
-      Array.from(sliderRef.current.children).forEach((slide) => {
-        gsap.fromTo(
-          slide.querySelectorAll(".reveal-item"),
-          { opacity: 0, y: 28 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.9,
-            stagger: 0.12,
-            ease: "power3.out",
-            scrollTrigger: { trigger: sectionRef.current, start: "top 85%" },
-          },
-        );
-      });
-    }, sectionRef);
+  const handleTouchMove = (e) => {
+    endX.current = e.touches[0].clientX;
+  };
 
-    return () => ctx.revert();
-  }, [data.length]);
+  const handleTouchEnd = () => {
+    const diff = startX.current - endX.current;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) slide(1);
+      else slide(-1);
+    }
+  };
 
   const openModal = (doctor) => setActiveDoctor(doctor);
 
@@ -66,15 +96,17 @@ export default function TestimonialSlider({ data }) {
 
     gsap.set(overlayRef.current, { opacity: 0 });
     gsap.set(modalRef.current, { y: "100%", opacity: 0 });
+
     gsap.to(overlayRef.current, {
       opacity: 1,
       duration: 0.4,
       ease: "power2.out",
     });
+
     gsap.to(modalRef.current, {
       y: "0%",
       opacity: 1,
-      duration: 0.7,
+      duration: 0.6,
       ease: "power4.out",
     });
 
@@ -86,13 +118,14 @@ export default function TestimonialSlider({ data }) {
         {
           opacity: 1,
           y: 0,
-          duration: 0.6,
-          stagger: 0.09,
+          duration: 0.5,
+          stagger: 0.07,
           ease: "power3.out",
-          delay: 0.3,
+          delay: 0.2,
         },
       );
     }
+
     return () => {
       document.body.style.overflow = "auto";
     };
@@ -102,12 +135,12 @@ export default function TestimonialSlider({ data }) {
     gsap.to(modalRef.current, {
       y: "100%",
       opacity: 0,
-      duration: 0.5,
+      duration: 0.45,
       ease: "power4.in",
     });
     gsap.to(overlayRef.current, {
       opacity: 0,
-      duration: 0.35,
+      duration: 0.3,
       delay: 0.1,
       onComplete: () => {
         document.body.style.overflow = "auto";
@@ -120,179 +153,129 @@ export default function TestimonialSlider({ data }) {
 
   return (
     <>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap');
-        .font-display { font-family: 'Cormorant Garamond', serif; }
-        .font-body { font-family: 'DM Sans', sans-serif; }
-        .slide-track { will-change: transform; }
-        .card-image-wrap { position: relative; overflow: hidden; border-radius: 20px; }
-        .card-image-wrap::after { content: ''; position: absolute; inset: 0; background: linear-gradient(160deg, transparent 40%, rgba(15,23,42,0.18) 100%); border-radius: 20px; }
-        .card-image-wrap img { transition: transform 0.8s ease; }
-        .card-image-wrap:hover img { transform: scale(1.04); }
-        .know-more-btn { position: relative; overflow: hidden; letter-spacing: 0.08em; }
-        .dot-indicator { transition: all 0.4s ease; }
-        .modal-bg-pattern { position: absolute; inset: 0; opacity: 0.025; background-image: radial-gradient(circle, currentColor 1px, transparent 1px); background-size: 28px 28px; pointer-events: none; }
-        .credential-chip { display: inline-flex; align-items: center; padding: 6px 14px; border-radius: 999px; font-size: 13px; line-height: 1.5; }
-        .modal-scroll::-webkit-scrollbar { width: 4px; }
-        .modal-scroll::-webkit-scrollbar-track { background: transparent; }
-        .modal-scroll::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 999px; }
-      `}</style>
-
-      <section
-        ref={sectionRef}
-        className="relative overflow-hidden font-body bg-gradient-to-t from-[#F8FAFC] to-[#E0F2FE] py-8"
-        style={{ minHeight: "100vh" }}
-        id="doctors"
-      >
-        <div
-          className="flex flex-col items-center text-center px-4"
-          style={{
-            paddingTop: "clamp(80px, 12vh, 120px)",
-            paddingBottom: "clamp(24px, 4vh, 40px)",
-          }}
-        >
-          <span className="font-body text-[10px] tracking-[0.55em] text-slate-400 uppercase font-medium">
-            Our Professionals
-          </span>
-          <h2 className=" text-4xl md:text-5xl font-serif text-[#0F172A] leading-tight">
+      <section className="relative overflow-hidden font-body bg-gradient-to-b from-[#E0F2FE] to-[#F8FAFC] pb-10">
+        <div className="flex flex-col items-center text-center px-4 mb-4">
+          <div className="flex flex-col items-center">
+            <p className="text-[11px] tracking-[0.4em] uppercase text-[#1E40AF]/60">
+              EXPERTS
+            </p>
+          </div>
+          <h2 className="text-4xl md:text-5xl font-serif text-[#0F172A] leading-tight">
             Our <span className="italic text-[#1E40AF]">Doctors</span>
           </h2>
         </div>
 
-        <div
-          ref={sliderRef}
-          className="slide-track flex"
-          style={{ width: `${data.length * 100}vw` }}
+        <button
+          onClick={() => slide(-1)}
+          className="hidden md:flex absolute left-8 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-white shadow-lg items-center justify-center hover:scale-110 transition"
         >
-          {data.map((item, i) => (
-            <div
-              key={i}
-              className="flex items-center justify-center"
-              style={{ width: "100vw", padding: "0 5vw" }}
-            >
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center w-full max-w-6xl mx-auto">
-                <div
-                  className="reveal-item card-image-wrap mx-auto md:mx-0"
-                  style={{
-                    width: "min(320px, 80vw)",
-                    height: "min(400px, 65vw)",
-                  }}
-                >
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="w-full h-full object-cover"
-                    style={{ borderRadius: "20px" }}
-                  />
-                  <div
-                    style={{
-                      position: "absolute",
-                      bottom: 16,
-                      left: 16,
-                      zIndex: 2,
-                      background: "rgba(255,255,255,0.92)",
-                      backdropFilter: "blur(8px)",
-                      borderRadius: "12px",
-                      padding: "7px 14px",
-                    }}
-                  >
-                    <span
-                      className="font-body text-xs font-medium"
-                      style={{ color: item.color, letterSpacing: "0.08em" }}
-                    >
-                      {item.tag}
-                    </span>
-                  </div>
-                </div>
+          <FiChevronLeft size={24} className="text-[#1E40AF]" />
+        </button>
 
-                <div className="text-center md:text-left space-y-4">
-                  <div className="reveal-item">
-                    <h2 className="font-display text-3xl md:text-4xl text-slate-800 leading-tight">
-                      {item.name}
-                    </h2>
-                    <p
-                      className="font-body text-sm font-medium mt-1"
-                      style={{ color: item.color, letterSpacing: "0.1em" }}
-                    >
-                      {item.role}
+        <button
+          onClick={() => slide(1)}
+          className="hidden md:flex absolute right-8 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-white shadow-lg items-center justify-center hover:scale-110 transition"
+        >
+          <FiChevronRight size={24} className="text-[#1E40AF]" />
+        </button>
+
+        <div
+          className="overflow-hidden"
+          onMouseEnter={() => setHovering(true)}
+          onMouseLeave={() => setHovering(false)}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
+          <div
+            ref={trackRef}
+            className="flex"
+            style={{ width: `${loopData.length * 100}vw` }}
+          >
+            {loopData.map((item, i) => (
+              <div
+                key={i}
+                className="flex items-center justify-center"
+                style={{ width: "100vw", padding: "0" }}
+              >
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 sm:gap-40 items-center w-full max-w-5xl mx-auto">
+                  <div className="w-full h-[400px] md:h-[480px] lg:h-[500px] rounded-2xl overflow-hidden shadow-xl">
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="w-full h-full object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
+                      style={{
+                        transform: i === index ? "scale(1.05)" : "scale(1)",
+                      }}
+                    />
+                  </div>
+
+                  <div className="space-y-3 text-center md:text-left">
+                    <div>
+                      <h2 className="text-2xl md:text-3xl font-serif text-[#0F172A]">
+                        {item.name}
+                      </h2>
+                      <p
+                        className="text-xs mt-1 tracking-widest"
+                        style={{ color: item.color }}
+                      >
+                        {item.role}
+                      </p>
+                      <p className="text-xs text-slate-400">{item.degrees}</p>
+                    </div>
+
+                    <div
+                      className="h-px w-10 mx-auto md:mx-0"
+                      style={{ background: item.color, opacity: 0.3 }}
+                    />
+
+                    <p className="text-sm text-slate-500 line-clamp-2">
+                      {item.specialty}
                     </p>
-                    <p className="font-body text-xs text-slate-400 mt-0.5 tracking-wide">
-                      {item.degrees}
-                    </p>
-                  </div>
 
-                  <div
-                    className="reveal-item h-px w-12 mx-auto md:mx-0"
-                    style={{ background: item.color, opacity: 0.3 }}
-                  />
-
-                  <div className="reveal-item">
-                    <p className="text-sm text-slate-500">{item.specialty}</p>
-                  </div>
-
-                  <div className="reveal-item relative pl-5 md:pl-6">
-                    <span
-                      className="font-display absolute -left-1 top-0 text-5xl leading-none"
-                      style={{ color: item.color, opacity: 0.2 }}
-                    >
-                      "
-                    </span>
-                    <p className="font-display text-lg md:text-xl text-slate-700 leading-relaxed italic">
+                    <p className="italic text-base text-slate-700 line-clamp-3">
                       {item.bio}
                     </p>
-                  </div>
 
-                  <div className="reveal-item pt-2">
                     <button
                       onClick={() => openModal(item)}
-                      className="relative know-more-btn font-body text-sm font-medium px-7 py-3 rounded-full transition-all duration-300 overflow-hidden group"
+                      className="px-6 py-2.5 rounded-full text-white text-sm"
                       style={{
                         background: item.color,
-                        color: "#fff",
-                        border: "none",
-                        cursor: "pointer",
-                        boxShadow: `0 4px 20px ${item.color}40`,
+                        boxShadow: `0 4px 16px ${item.color}40`,
                       }}
                     >
-                      <span className="relative z-10 transition-transform duration-300 group-hover:translate-y-[-2px]">
-                        View Full Profile
-                      </span>
-                      <span
-                        className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                        style={{
-                          background: `linear-gradient(120deg, ${item.color} 0%, #ffffff33 50%, ${item.color} 100%)`,
-                        }}
-                      ></span>
-                      <span
-                        className="absolute inset-0 rounded-full transition-transform duration-500 scale-0 group-hover:scale-110"
-                        style={{
-                          border: `2px solid ${item.color}`,
-                        }}
-                      ></span>
+                      View Profile
                     </button>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-          {data.map((item, i) => (
-            <div
+        <div className="flex justify-center mt-6 gap-2">
+          {data.map((_, i) => (
+            <button
               key={i}
-              className="dot-indicator rounded-full"
-              style={{
-                width: currentIndex === i ? 24 : 8,
-                height: 8,
-                background:
-                  currentIndex === i ? data[currentIndex]?.color : "#CBD5E1",
+              onClick={() => {
+                if (animating.current) return;
+                setIndex(data.length + i);
+                gsap.to(trackRef.current, {
+                  x: `-${(data.length + i) * 100}vw`,
+                  duration: 0.8,
+                  ease: "expo.inOut",
+                });
               }}
+              className={`h-2.5 rounded-full transition-all duration-300 ${
+                i === currentIndex ? "w-6" : "w-2.5 bg-slate-300"
+              }`}
+              style={
+                i === currentIndex ? { backgroundColor: data[i].color } : {}
+              }
             />
           ))}
         </div>
       </section>
-
       {activeDoctor && (
         <div
           ref={overlayRef}
@@ -319,9 +302,9 @@ export default function TestimonialSlider({ data }) {
 
             <div
               ref={modalContentRef}
-              className="modal-scroll h-full overflow-y-auto pt-20 md:pt-14"
+              className="modal-scroll h-full overflow-y-auto pt-14 md:pt-10"
             >
-              <div className="max-w-5xl mx-auto px-8 md:px-14 pt-14 pb-24 space-y-10">
+              <div className="max-w-5xl mx-auto px-6 md:px-10 pt-8 pb-16 space-y-6">
                 <div className="modal-reveal flex items-start justify-between">
                   <div>
                     <span
@@ -333,7 +316,7 @@ export default function TestimonialSlider({ data }) {
                     >
                       {activeDoctor.tag}
                     </span>
-                    <h2 className="font-display text-3xl md:text-4xl text-slate-800 leading-tight mt-4">
+                    <h2 className="font-display text-2xl md:text-3xl text-slate-800 leading-tight mt-3">
                       {activeDoctor.name}
                     </h2>
                     <p
@@ -366,7 +349,7 @@ export default function TestimonialSlider({ data }) {
 
                 <div className="modal-reveal grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div
-                    className="rounded-2xl p-6"
+                    className="rounded-xl p-4"
                     style={{ background: activeDoctor.accent + "80" }}
                   >
                     <p className="font-body text-xs text-slate-400 uppercase tracking-widest mb-2">
@@ -377,7 +360,7 @@ export default function TestimonialSlider({ data }) {
                     </p>
                   </div>
                   <div
-                    className="rounded-2xl p-6"
+                    className="rounded-xl p-4"
                     style={{ background: activeDoctor.accent + "80" }}
                   >
                     <p className="font-body text-xs text-slate-400 uppercase tracking-widest mb-2">
@@ -397,7 +380,7 @@ export default function TestimonialSlider({ data }) {
                     {activeDoctor.credentials.map((c, i) => (
                       <span
                         key={i}
-                        className="credential-chip font-body"
+                        className="credential-chip font-body p-1"
                         style={{
                           background: activeDoctor.accent,
                           color: activeDoctor.color,

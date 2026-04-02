@@ -3,25 +3,8 @@ import AboutBento from "../sections/AboutBento"
 import Timeline from '../sections/Timeline';
 
 const About = () => {
-  useLayoutEffect(() => {
-    window.scrollTo(0, 0);
-    
-    if ('scrollRestoration' in window.history) {
-        window.history.scrollRestoration = 'manual';
-    }
-
-    const timer = setTimeout(() => {
-        ScrollTrigger.refresh();
-    }, 500);
-
-    return () => {
-        if ('scrollRestoration' in window.history) {
-            window.history.scrollRestoration = 'auto';
-        }
-    };
-}, []);
   return (
-    <div>
+    <div className='font-sans font-normal text-[14px] leading-[20px] tracking-normal overflow-x-hidden mt-12'>
       <AboutBento />
       <Timeline />
     </div>

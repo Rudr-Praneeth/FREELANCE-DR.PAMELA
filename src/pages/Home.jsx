@@ -1,4 +1,3 @@
-import React, {useEffect, useLayoutEffect} from "react";
 import Hero from "../components/Hero";
 import Stats from "../components/Stats";
 import Services from "../components/Services";
@@ -6,8 +5,9 @@ import Doctors from "../components/Doctors";
 import Contact from "../components/Contact";
 import ScrollToTop from "../utils/ScrollToTop"
 
+
+
 const Home = () => {
-  
   const doctorData = [
     {
       name: "Dr. D. Pushpalatha",
@@ -59,7 +59,7 @@ const Home = () => {
       tag: "Rehabilitation",
       credentials: [
         "B.P.T., Christian Medical College, Vellore",
-        "M.Sc. Neurophysiotherapy, University of East London (1997)",
+        "M.Sc. Neurophysiotherapy, University of East London",
         "Certificate in Neurological Rehabilitation, University of Newcastle, UK",
       ],
       narrative: `Pamela Narayan holds a Bachelor in Physiotherapy from Christian Medical College, Vellore  one of India's foremost medical institutions. She went on to complete her M.Sc. in Neurophysiotherapy from the University of East London in 1997, bringing international rigour to her practice.`,
