@@ -9,75 +9,95 @@ gsap.registerPlugin(ScrollTrigger);
 const servicesList = [
   {
     title: "Obstetrics & Gynaecology",
-    desc: "Complete women’s healthcare across life stages",
+    desc: "Comprehensive maternity and women’s healthcare.",
     fullDesc:
-      "Comprehensive women’s healthcare covering adolescent wellness, maternity care, fertility guidance, surgical expertise, and menopause management with a patient-first approach.",
+      "Complete obstetric and gynaecological care covering antenatal, intranatal, and postnatal services, along with diagnosis and treatment of a wide range of women’s health conditions in a patient-centred environment.",
     details: [
-      "Antenatal & high-risk pregnancy care",
-      "Normal delivery & postnatal support",
-      "Fibroid & ovarian cyst treatment",
-      "Hormonal & menstrual management",
-      "Family planning & contraception",
+      "Antenatal, intranatal & postnatal care",
+      "Management of normal & high-risk pregnancies",
+      "Normal delivery & obstetric care",
+      "Treatment for menstrual irregularities",
+      "Management of fibroids, ovarian cysts & uterine disorders",
+      "Menopause care & hormonal health",
+      "Gynaecological infections & pelvic pain management",
+      "Family planning & contraception services",
     ],
   },
   {
-    title: "Laparoscopic Surgery",
-    desc: "Advanced minimally invasive surgery.",
+    title: "Laparoscopic Gynaecological Surgery",
+    desc: "Minimally invasive surgical care for women.",
     fullDesc:
-      "Precision-driven keyhole surgical procedures designed for faster recovery, minimal scarring, and reduced hospital stay.",
+      "Advanced laparoscopic (keyhole) surgical procedures designed to provide safe, precise treatment with reduced pain, minimal scarring, and faster recovery.",
     details: [
       "Laparoscopic hysterectomy",
       "Ovarian cyst removal",
       "Endometriosis surgery",
+      "Ectopic pregnancy management",
       "Diagnostic laparoscopy",
+      "Reduced pain, blood loss & hospital stay",
+      "Faster recovery with minimal complications",
     ],
   },
   {
-    title: "Orthopaedic & Arthroscopic",
-    desc: "Restoring strength and mobility.",
+    title: "Neurology & Neurosurgery",
+    desc: "Advanced care for brain, spine, and nerve conditions.",
     fullDesc:
-      "Comprehensive orthopaedic solutions including joint replacement, arthroscopy, trauma management, and rehabilitation programs.",
+      "Comprehensive neurological and neurosurgical services including diagnosis, treatment, and surgical management of brain, spine, and nerve disorders with integrated follow-up care.",
     details: [
-      "Knee replacement",
-      "Shoulder arthroscopy",
-      "Fracture management",
-      "Sports rehabilitation",
+      "Diagnosis & treatment of neurological disorders",
+      "Stroke evaluation, treatment & follow-up",
+      "Epilepsy & seizure disorder management",
+      "Parkinson’s disease & movement disorders care",
+      "Brain tumour & intracranial surgery",
+      "Spine surgery (disc, stenosis, trauma)",
+      "Peripheral nerve surgery & injury management",
+      "Care for headaches, vertigo, neuropathy & memory disorders",
     ],
   },
   {
-    title: "Paediatrics",
-    desc: "Compassionate child healthcare.",
+    title: "Neuro-Paediatric Services",
+    desc: "Specialised neurological care for children.",
     fullDesc:
-      "Dedicated pediatric care ensuring holistic development, preventive care, immunization, and neonatal expertise.",
+      "Dedicated neuro-paediatric services focusing on early diagnosis, timely intervention, and long-term developmental support for infants, children, and adolescents.",
     details: [
-      "Vaccinations",
-      "Growth monitoring",
-      "Neonatal care",
-      "Nutrition guidance",
+      "Pediatric seizures & epilepsy management",
+      "Developmental delay & neurodevelopmental assessment",
+      "Pediatric movement disorders & tone abnormalities",
+      "Management of neurological infections",
+      "Care for congenital & acquired neurological conditions",
+      "Coordination with neurorehabilitation & physiotherapy",
     ],
   },
   {
-    title: "Bleeding Disorders",
-    desc: "Specialized blood care.",
+    title: "Neurorehabilitation & Physiotherapy",
+    desc: "Integrated rehabilitation for recovery and mobility.",
     fullDesc:
-      "Advanced management of hemophilia, clotting disorders, and genetic blood conditions using evidence-based treatment protocols.",
+      "Structured outpatient and inpatient rehabilitation services supporting recovery after neurological illness, injury, or surgery through multidisciplinary care and continuous monitoring.",
     details: [
-      "Hemophilia management",
-      "Clotting factor therapy",
-      "Platelet disorder treatment",
-      "Genetic counselling",
+      "Post-stroke rehabilitation",
+      "Rehabilitation after brain & spine surgery",
+      "Recovery after head injury & spinal trauma",
+      "Management of long-term neurological disability",
+      "Neurological & neuro-paediatric physiotherapy",
+      "Post-operative & musculoskeletal rehabilitation",
+      "Balance, gait & strengthening therapy",
+      "Early mobilisation & bedside physiotherapy for inpatients",
     ],
   },
   {
-    title: "General Medicine",
-    desc: "Comprehensive adult care.",
+    title: "General Medicine & Preventive Care",
+    desc: "Comprehensive medical and wellness services.",
     fullDesc:
-      "Preventive, diagnostic, and long-term care for chronic and lifestyle diseases delivered with precision and empathy.",
+      "Holistic outpatient and inpatient care focusing on prevention, diagnosis, long-term disease management, and continuity of care using evidence-based practices.",
     details: [
-      "Diabetes management",
-      "Hypertension care",
-      "Thyroid disorders",
-      "Preventive health checkups",
+      "General medicine consultations",
+      "Preventive health check-ups & screenings",
+      "Lifestyle disease management",
+      "Health education & counselling",
+      "Follow-up & long-term care",
+      "Outpatient (OPD) and inpatient (IPD) services",
+      "24/7 nursing care & patient monitoring",
+      "Well-equipped wards & private rooms",
     ],
   },
 ];
@@ -235,7 +255,7 @@ const Services = () => {
             <div
               key={i}
               onClick={() => setSelected(service)}
-              className="service-card h-[30vh] group relative p-8 bg-white/70 backdrop-blur-xl border border-[#1E40AF]/10 rounded-xl hover:border-[#1E40AF]/40 transition-all duration-500 cursor-pointer overflow-hidden"
+              className="service-card h-[20vh] sm:h-[30vh] group relative p-8 bg-white/70 backdrop-blur-xl border border-[#1E40AF]/10 rounded-xl hover:border-[#1E40AF]/40 transition-all duration-500 cursor-pointer overflow-hidden"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-[#1E40AF]/5 to-transparent opacity-0 group-hover:opacity-100 transition duration-500 rounded-xl" />
 
@@ -248,14 +268,14 @@ const Services = () => {
                 </h3>
               </div>
 
-              <p className="card-desc pl-4 text-sm text-[#0F172A]/60 leading-relaxed relative z-10 mb-8">
+              <p className="card-desc pl-4 text-sm text-[#0F172A]/60 leading-relaxed relative z-10 mb-4 line-clamp-3">
                 {service.desc}
               </p>
 
               <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#1E40AF] transition-all duration-500 group-hover:w-full" />
 
-              <div className="absolute bottom-10 z-10">
-                <span className="inline-block text-[10px] tracking-[0.35em] uppercase text-[#1E40AF] opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
+              <div className="absolute bottom-6 z-10">
+                <span className="inline-block text-[10px] tracking-[0.35em] uppercase text-[#1E40AF] opacity-100 translate-y-0 sm:opacity-0 sm:translate-y-2 sm:group-hover:opacity-100 sm:group-hover:translate-y-0 transition-all duration-500">
                   Know More
                 </span>
               </div>
