@@ -63,7 +63,7 @@ const Home = () => {
         "Certificate in Neurological Rehabilitation, University of Newcastle, UK",
       ],
       narrative: `Pamela Narayan holds a Bachelor in Physiotherapy from Christian Medical College, Vellore  one of India's foremost medical institutions. She went on to complete her M.Sc. in Neurophysiotherapy from the University of East London in 1997, bringing international rigour to her practice.`,
-      extended: `Most recently, she completed a Certificate Course in Neurological Rehabilitation awarded by the University of Newcastle, UK  a testament to her commitment to staying at the forefront of her field.\n\nBeyond neurological disorders, Pamela brings specialised experience in obstetric physiotherapy, supporting women through the physical demands of pregnancy and recovery.\n\nShe is a proud member of the Physiotherapy Committee of the World Federation of Haemophilia, where she remains an active and valued contributor  bridging the worlds of physiotherapy and haematological care with both expertise and dedication.`,
+      extended: `She completed a Certificate Course in Neurological Rehabilitation awarded by the University of Newcastle, UK  a testament to her commitment to staying at the forefront of her field.\n\nBeyond neurological disorders, Pamela brings specialised experience in physiotherapy, supporting women through the physical demands of pregnancy and recovery.\n\nShe is also a leading international resource person for Musculoskeletal issues in Persons with Bleeding Disorders, where she remains an active and valued contributor bridging the worlds of physiotherapy and haematological care with both expertise and dedication.`,
     },
   ];
   return (
