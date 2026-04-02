@@ -33,7 +33,7 @@ const Footer = () => {
               Lakshmi Hospital & Research Centre’s mission is to provide personalized, high-quality care
               on an as-needed or preventative basis. We have created a practice that we believe in and choose for our own family members. 
             </p>
-            <div className="flex gap-3 pt-2">
+            {/* <div className="flex gap-3 pt-2">
               {[Facebook, Instagram, Linkedin].map((Icon, i) => (
                 <a 
                   key={i} 
@@ -43,7 +43,7 @@ const Footer = () => {
                   <Icon size={16} />
                 </a>
               ))}
-            </div>
+            </div> */}
           </div>
 
           <div className="lg:col-span-2">

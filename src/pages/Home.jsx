@@ -68,7 +68,7 @@ const Home = () => {
   ];
   return (
     <div className="font-sans font-normal text-[14px] leading-[20px] tracking-normal overflow-x-hidden">
-      <ScrollToTop />
+      {/* <ScrollToTop /> */}
       <Hero />
       <Stats />
       <Services />
