@@ -55,7 +55,7 @@ const servicesList = [
     ],
   },
   {
-    title: "Neuro-Paediatric Services",
+    title: "Neuro-Paediatric Surgery",
     desc: "Specialised neurological care for children.",
     fullDesc:
       "Dedicated neuro-paediatric services focusing on early diagnosis, timely intervention, and long-term developmental support for infants, children, and adolescents.",
@@ -85,19 +85,19 @@ const servicesList = [
     ],
   },
   {
-    title: "General Medicine & Preventive Care",
-    desc: "Comprehensive medical and wellness services.",
+    title: "Haemophilia and Other Bleeding Disorders",
+    desc: "Specialized care for bleeding and clotting conditions.",
     fullDesc:
-      "Holistic outpatient and inpatient care focusing on prevention, diagnosis, long-term disease management, and continuity of care using evidence-based practices.",
+      "Comprehensive diagnosis, treatment, and long-term management of haemophilia and other bleeding disorders with a focus on patient safety, prevention of complications, and improved quality of life.",
     details: [
-      "General medicine consultations",
-      "Preventive health check-ups & screenings",
-      "Lifestyle disease management",
-      "Health education & counselling",
-      "Follow-up & long-term care",
-      "Outpatient (OPD) and inpatient (IPD) services",
-      "24/7 nursing care & patient monitoring",
-      "Well-equipped wards & private rooms",
+      "Diagnosis and classification of bleeding disorders",
+      "Haemophilia A & B management",
+      "Clotting factor replacement therapy",
+      "Management of spontaneous and injury-related bleeding",
+      "Preventive care and complication monitoring",
+      "Genetic counselling and family screening",
+      "Patient education and lifestyle guidance",
+      "Emergency bleeding care support",
     ],
   },
 ];
