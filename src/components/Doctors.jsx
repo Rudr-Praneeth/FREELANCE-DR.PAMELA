@@ -198,14 +198,14 @@ export default function TestimonialSlider({ data }) {
                 className="flex items-center justify-center"
                 style={{ width: "100vw", padding: "0" }}
               >
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 sm:gap-40 items-center w-full max-w-5xl mx-auto">
-                  <div className="w-full h-[400px] md:h-[480px] lg:h-[500px] rounded-2xl overflow-hidden shadow-xl">
+                <div className="p-8 md:p-0 grid grid-cols-1 md:grid-cols-2 gap-12 sm:gap-40 items-center w-full max-w-5xl mx-auto">
+                  <div className="w-full aspect-[3/4] md:h-[480px] lg:h-[500px] rounded-2xl overflow-hidden shadow-xl">
                     <img
                       src={item.image}
                       alt={item.name}
-                      className="w-full h-full object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
+                      className="w-full h-full object-cover object-center transition-transform duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
                       style={{
-                        transform: i === index ? "scale(1.05)" : "scale(1)",
+                        transform: i === index ? "scale(1.02)" : "scale(0.98)",
                       }}
                     />
                   </div>
