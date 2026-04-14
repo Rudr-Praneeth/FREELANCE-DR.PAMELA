@@ -268,7 +268,7 @@ const Services = () => {
                 </h3>
               </div>
 
-              <p className="card-desc pl-4 text-sm text-[#0F172A]/60 leading-relaxed relative z-10 mb-4 line-clamp-3">
+              <p className="card-desc hidden sm:block pl-4 text-sm text-[#0F172A]/60 leading-relaxed relative z-10 mb-4 line-clamp-3">
                 {service.desc}
               </p>
 
