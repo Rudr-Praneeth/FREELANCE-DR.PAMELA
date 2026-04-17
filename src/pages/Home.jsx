@@ -50,7 +50,7 @@ const Home = () => {
       name: "Dr. Pamela Narayan",
       role: "Consultant Physiotherapist",
       degrees: "B.P.T. (Vellore) · M.Sc. (London)",
-      specialty: "Neurological Rehabilitation & Obstetric Physiotherapy",
+      specialty: "Neurological Rehabilitation & Physiotherapy",
       experience: "Senior Consultant",
       bio: "Expert in neurological rehabilitation, movement disorders, and obstetric physiotherapy with international training.",
       image: "Pamela.jpeg",
